@@ -8,19 +8,16 @@ comments: false
 toc: true
 pinned: true
 ---
-# Preface
-This is my notes of the course **"MITx:  18.6501x [Fundamentals of Statistics](https://courses.edx.org/courses/course-v1:MITx+18.6501x+3T2019/course/)"** on edX.
-
-The session that I participated started at **Sept 2, 2019**. 
-
-The purpose of this document is to help me remember what I have learnt.
+This is my notes of the course **"MITx:  18.6501x Fundamentals of Statistics"** on edX. The session that I participated started at **Sept 2, 2019**. The purpose of this document is to help me remember what I have learnt.
+<!-- more -->
+Here is the [link](https://courses.edx.org/courses/course-v1:MITx+18.6501x+3T2019/course/).
 
 # Unit 1: Introduction to Statistics
 
 ## Probability and Statistics
 Very explicit explanation of the relation of **probability** and **statistics**:
 
-![probability and statistics](/images/probability%20and%20statistics.png)
+![probability and statistics](https://raw.githubusercontent.com/flpvvvv/flpvvvv.github.io/master/images/probability%20and%20statistics.png)
 
 If we know the truth, then we can use "Probability" to predict/explain the "Observations". However, 
 > statistics is **reverse engineering** probability. 
@@ -44,19 +41,26 @@ $$
 ## Laws of Large Numbers (LLN)
 Let $X_1,X_2,…,X_n$ be i.i.d. random variables, with $\mu=E[X]$ and $σ^2=Var[X]$.
 Laws (weak and strong) of large numbers (LLN):
+
 $$
-\bar X_n=\frac 1n\sum _{i=1}^nX_i\xrightarrow[n\to \infty]{P,\; a.s.}\mu
+\bar X_n \coloneqq \frac 1n\sum _{i=1}^nX_i\xrightarrow[n\to \infty]{P,\; a.s.}\mu
 $$
+
 where the convergence is in probability (as denoted by *P* on the convergence arrow) and almost surely (as denoted by *a.s.* on the arrow) for the weak and strong laws respectively.
 
 When n is large enough, the sample average will converge to the expectation of variables.
 
 ## Central Limit Theorem (CLT)
+
 $$
 \sqrt n \frac {\bar X_n-\mu}{\sigma}\xrightarrow [n\to \infty]{(d)}\mathcal{N}(0,1) \\
 \quad \\
 or \ equivalently,\quad\sqrt n (\bar X_n-\mu)\xrightarrow [n\to \infty]{(d)}\mathcal{N}(0,\sigma^2)
 $$
+
 where the convergence is in distribution, as denoted by *(d)* on top of the convergence arrow.
 
-Rule of thumb: n $\geq$ 30, to use CTL. When n is large enough, the sample average minus the expectation converge to a Gaussian distribution.  
+Rule of thumb: n $\geq$ 30, to use CTL. 
+
+When n is large enough, the sample average minus the expectation converge to a Gaussian distribution.  
+
