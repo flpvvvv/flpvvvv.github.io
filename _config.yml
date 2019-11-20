@@ -26,10 +26,10 @@ navigation:
     url: /
   - name: About
     url: /about
-  - name: Archive
-    url: /archive
-  - name: Tags
-    url: /tags
+#   - name: Archive
+#     url: /archive
+#   - name: Tags
+#     url: /tags
 
 # 每页的文章数
 paginate: 8
