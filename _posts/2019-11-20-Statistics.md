@@ -20,6 +20,7 @@ Very explicit explanation of the relation of **probability** and **statistics**:
 ![probability and statistics](https://raw.githubusercontent.com/flpvvvv/flpvvvv.github.io/master/images/probability%20and%20statistics.png)
 
 If we know the truth, then we can use "Probability" to predict/explain the "Observations". However, 
+
 > statistics is **reverse engineering** probability. 
 
 We have some observations (most of time we can them data), but we have no idea about the truth. We use the observations to estimate the truth. This is the purpose of statistics. From data, we try to recover what the truth is like.
@@ -28,22 +29,24 @@ We have some observations (most of time we can them data), but we have no idea a
 ### i.i.d. 
 Data  that  **i.i.d.**  stands for  **independent and identically distributed**  .
 
-A collection of random variables  X1,…,Xn  are  **i.i.d.**  if
-1.  each  Xi  follows a distribution  Pi, all those distributions  Pi  are the same, and
-2.  Xi  are (mutually) independent
+A collection of random variables  $X_1,…,X_n$  are  **i.i.d.**  if
+1.  each  $X_i$  follows a distribution  Pi, all those distributions  Pi  are the same, and
+2. $X_i$  are (mutually) independent
 
 ### Sample average
-We denote the **sample average**, or **sample mean**, of n random variables  X1,…,Xn  by
+We denote the **sample average**, or **sample mean**, of n random variables  $X_1,…,X_n$ by
+
 $$
 \bar X_n=\frac 1n\sum _{i=1}^nX_i
 $$
 
 ## Laws of Large Numbers (LLN)
 Let $X_1,X_2,…,X_n$ be i.i.d. random variables, with $\mu=E[X]$ and $σ^2=Var[X]$.
+
 Laws (weak and strong) of large numbers (LLN):
 
 $$
-\bar X_n \coloneqq \frac 1n\sum _{i=1}^nX_i\xrightarrow[n\to \infty]{P,\; a.s.}\mu
+\bar X_n = \frac 1n\sum _{i=1}^nX_i\xrightarrow[n\to \infty]{P,\; a.s.}\mu
 $$
 
 where the convergence is in probability (as denoted by *P* on the convergence arrow) and almost surely (as denoted by *a.s.* on the arrow) for the weak and strong laws respectively.
@@ -63,4 +66,3 @@ where the convergence is in distribution, as denoted by *(d)* on top of the conv
 Rule of thumb: n $\geq$ 30, to use CTL. 
 
 When n is large enough, the sample average minus the expectation converge to a Gaussian distribution.  
-
