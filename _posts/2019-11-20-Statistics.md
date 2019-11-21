@@ -150,11 +150,12 @@ Let F denote the CDF of X:
 - $F(q_{\alpha })=1-\alpha$
 - if $F$ is invertible, then $q_{\alpha }=F^{-1}(1-\alpha)$
 - $\mathbf{P}\left(X> q_{\alpha }\right)=\alpha$
-- if $X=Z\sim \mathcal{N}(0,1)$: $\mathbf{P}\left(|X|> q_{\alpha/2 }\right)=\alpha$
+- if $X=Z\sim \mathcal{N}(0,1)$ : $\mathbf{P}|X|> q_{\alpha/2 }=\alpha$
 
 Some important quantiles of the $Z\sim \mathcal{N}(0,1)$ are:
 
 $\alpha$ | 2.5% | 5% | 10%
--------- | ------ | ----| ----
+--- | --- | --- | ---
 $q_{\alpha}$ | 1.96 | 1.65 | 1.28
 
+to be continued
