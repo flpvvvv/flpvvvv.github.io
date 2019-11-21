@@ -70,7 +70,7 @@ Rule of thumb: n $\geq$ 30, to use CTL.
 
 When n is large enough, the sample average converges to a Gaussian distribution.  
 
-## 3 inequalities
+## Three inequalities
 ### Hoeffding's Inequality
 When n is not large enough to apply CTL, we can use Hoeffding's Inequality.
 
@@ -150,7 +150,7 @@ Let F denote the CDF of X:
 - $F(q_{\alpha })=1-\alpha$
 - if $F$ is invertible, then $q_{\alpha }=F^{-1}(1-\alpha)$
 - $\mathbf{P}\left(X> q_{\alpha }\right)=\alpha$
-- if $X=Z\sim \mathcal{N}(0,1)$ : $\mathbf{P}|X|> q_{\alpha/2 }=\alpha$
+- if $X=Z\sim \mathcal{N}(0,1) \text { : }\mathbf{P}|X|> q_{\alpha/2 }=\alpha$
 
 Some important quantiles of the $Z\sim \mathcal{N}(0,1)$ are:
 
@@ -158,4 +158,77 @@ $\alpha$ | 2.5% | 5% | 10%
 --- | --- | --- | ---
 $q_{\alpha}$ | 1.96 | 1.65 | 1.28
 
-to be continued
+## Three types of convergence
+
+- $(T_n)_{n\geq 1}$ is a sequence of random variables
+- T is a random variable (T may be deterministic)
+
+### Almost surely (a.s.) convergence
+is also known as **convergence with probability  1  (w.p.1)** and **strong convergence**.
+
+$$
+T_ n\xrightarrow [n\rightarrow \infty ]{a.s.}T \quad \text {iff} \quad \mathbf P[\{ \omega : T_n\xrightarrow [n\rightarrow \infty ]{}T(\omega)\}]=1
+$$
+
+### Convergence in probability
+
+$$
+T_ n\xrightarrow [n\rightarrow \infty ]{\mathbf P}T \quad \text {iff} \quad \mathbf P[|T_n-T|\geq \epsilon]\xrightarrow [n\rightarrow \infty ]{}0,\forall\epsilon >0
+$$
+
+### Convergence in distribution
+is also known as **convergence in law** and **weak convergence** .
+
+$$
+T_ n\xrightarrow [n\rightarrow \infty ]{(d)}T \quad \text {iff} \quad \mathbb E[f(T_ n)]\xrightarrow [n\rightarrow \infty ]{}\mathbb E[f(T)]
+$$
+
+for all continuous and bounded function $f$.
+
+When n is large enough, they have the same distribution (the same PDF/CDF).
+
+### Properties
+
+- If $(T_n)_{n\geq 1}$  converges a.s., then it also converges in probability, and the two limits are equal a.s.
+- If $(T_n)_{n\geq 1}$  converges in probability, then it also converges in distribution
+- Convergence in distribution implies convergence of probabilities if the limit has a density (e.g. Gaussian):
+
+$$
+T_ n\xrightarrow [n\rightarrow \infty ]{(d)}T \Rightarrow \mathbf {P}(a\leq T_n \leq b)\xrightarrow [n\rightarrow \infty ]{}\mathbf {P}(a\leq T \leq b)
+$$
+
+- Addition, Multiplication, and Division **preserves** convergence almost surely (a.s.) and in probability ($\mathbf P$)
+
+More precisely, assume
+
+$$
+T_ n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}T \quad \text {and} \quad U_ n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}U
+$$
+
+Then,
+	- $T_ n+U_n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}T+U$
+	- $T_ nU_n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}TU$
+	- if in addition, $U\ne0$ a.s., then $\frac {T_ n}{U_n}\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}\frac {T}{U}$
+
+In general, these rules **do not** apply to convergence in distribution (d).
+
+### Slutsky's Theorem
+For convergence in distribution, the Slutsky's Theorem will be our main tool.
+
+Let $(T_ n), (U_ n)$ be two sequences of r.v., such that:
+
+-  $T_ n\xrightarrow [n\to \infty ]{(d)}T$
+- $U_ n\xrightarrow [n\to \infty ]{\mathbf{P}}u$
+
+where $T$ is a r.v. and $u$ is a given real number (deterministic limit: $\mathbf{P}(U=u)=1$). Then,
+
+- $T_ n+U_n\xrightarrow [n\rightarrow \infty ]{(d)}T+u$
+- $T_ nU_n\xrightarrow [n\rightarrow \infty ]{(d)}Tu$
+- if in addition, $u\ne0$ a.s., then $\frac {T_ n}{U_n}\xrightarrow [n\rightarrow \infty ]{(d)}\frac {T}{u}$
+
+### Continuous Mapping Theorem
+If $f$ is a continuous function:
+
+$$
+T_ n\xrightarrow [n\rightarrow \infty ]{a.s./\mathbf P/(d)}T \Rightarrow f(T_n) \xrightarrow [n\rightarrow \infty ]{}f(T)
+$$
