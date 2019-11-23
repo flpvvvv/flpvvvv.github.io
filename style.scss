@@ -430,7 +430,7 @@ nav {
 
 .wrapper-content {
   float: right;
-  width: 70%;
+  width: 80%;
 
   @include mobile {
     float: none;
@@ -527,12 +527,12 @@ nav {
   width: 240px;
   height: 100%;
   left: 30%;
-  position: fixed;
+//   position: fixed;
   z-index: 4;
   padding: 60px 20px 0 20px;
   
   &:before{
-    content:"目录";
+    content:"Table of contents";
     margin: 0 0 1em 1em;
     font-weight: 700;
     font-size: 1.2em;
