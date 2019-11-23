@@ -85,9 +85,7 @@ Unlike for the central limit theorem, here the **sample size**  n  **does not ne
 ### Markov inequality
 For a random variable $X\geq 0$ with mean $\mu>0$, and any number $t>0$:
 
-$$
-\mathbf {P}(X\geq t) \leq \frac {\mu}{t}
-$$
+$$\mathbf {P}(X\geq t) \leq \frac {\mu}{t}$$
 
 Note that the Markov inequality is restricted to **non-negative** random variables.
 
@@ -115,16 +113,12 @@ There is **no** closed form for their cumulative distribution function (CDF).
 #### Invariant under affine transformation
 $X\sim \mathcal{N}(\mu,\sigma^2)$, then for any $a,b \in \mathbb {R}$,
 
-$$
-aX+b \sim \mathcal{N}(a\mu+b,a^2\sigma^2)
-$$
+$$aX+b \sim \mathcal{N}(a\mu+b,a^2\sigma^2)$$
 
 #### Standardization
 a.k.a. Normalization/Z-score. If $X\sim \mathcal{N}(\mu,\sigma^2)$, then
 
-$$
-Z=\frac {X-\mu}{\sigma} \sim \mathcal{N}(0,1)
-$$
+$$Z=\frac {X-\mu}{\sigma} \sim \mathcal{N}(0,1)$$
 
 Useful to compute probabilities from CDF of $Z\sim\mathcal{N}(0,1)$:
 
@@ -135,22 +129,19 @@ $$
 #### Symmetry
 if $X\sim \mathcal{N}(0,\sigma^2)$ and $x>0$:
 
-$$
-\mathbf {P}(|X|> x)=2\mathbf {P}(X> x)
-$$
+$$\mathbf {P}(|X|> x)=2\mathbf {P}(X> x)$$
 
 ## Quantiles
 Let $\alpha$ in (0,1), the quantile of order $1-\alpha$ of a random variable X is the number $q_\alpha$ such that:
 
-$$
-\mathbf{P}\left(X\leq q_{\alpha }\right)=1-\alpha
-$$
+$$\mathbf{P}\left(X\leq q_{\alpha }\right)=1-\alpha$$
 
 Let F denote the CDF of X:
+
 - $F(q_{\alpha })=1-\alpha$
 - if $F$ is invertible, then $q_{\alpha }=F^{-1}(1-\alpha)$
 - $\mathbf{P}\left(X> q_{\alpha }\right)=\alpha$
-- if $X=Z\sim \mathcal{N}(0,1) \text { : }\mathbf{P}|X|> q_{\alpha/2 }=\alpha$
+- if $X=Z\sim \mathcal N(0,1)$, then $\mathbf P|X|> q_ {\alpha/2}=\alpha$
 
 Some important quantiles of the $Z\sim \mathcal{N}(0,1)$ are:
 
@@ -193,24 +184,25 @@ When n is large enough, they have the same distribution (the same PDF/CDF).
 - If $(T_n)_{n\geq 1}$  converges in probability, then it also converges in distribution
 - Convergence in distribution implies convergence of probabilities if the limit has a density (e.g. Gaussian):
 
-$$
-T_ n\xrightarrow [n\rightarrow \infty ]{(d)}T \Rightarrow \mathbf {P}(a\leq T_n \leq b)\xrightarrow [n\rightarrow \infty ]{}\mathbf {P}(a\leq T \leq b)
-$$
+	$$
+	T_ n\xrightarrow [n\rightarrow \infty ]{(d)}T \Rightarrow \mathbf {P}(a\leq T_n \leq b)\xrightarrow [n\rightarrow \infty ]{}\mathbf {P}(a\leq T \leq b)
+	$$
 
 - Addition, Multiplication, and Division **preserves** convergence almost surely (a.s.) and in probability ($\mathbf P$)
 
-More precisely, assume
+	More precisely, assume
 
-$$
-T_ n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}T \quad \text {and} \quad U_ n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}U
-$$
+	$$
+	T_ n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}T \quad \text {and} \quad U_ n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}U
+	$$
 
-Then,
+	Then,
+
 	- $T_ n+U_n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}T+U$
 	- $T_ nU_n\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}TU$
 	- if in addition, $U\ne0$ a.s., then $\frac {T_ n}{U_n}\xrightarrow [n\rightarrow \infty ]{a.s. /\mathbf P}\frac {T}{U}$
 
-In general, these rules **do not** apply to convergence in distribution (d).
+	In general, these rules **do not** apply to convergence in distribution (d).
 
 ### Slutsky's Theorem
 For convergence in distribution, the Slutsky's Theorem will be our main tool.
