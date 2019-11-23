@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Statistics
+title: Unit 1 - Introduction to Statistics
 date: 2019-11-21
 Author: flpvvvv
 tags: [Statistics]
@@ -132,16 +132,16 @@ if $X\sim \mathcal{N}(0,\sigma^2)$ and $x>0$:
 $$\mathbf {P}(|X|> x)=2\mathbf {P}(X> x)$$
 
 ## Quantiles
-Let $\alpha$ in (0,1), the quantile of order $1-\alpha$ of a random variable X is the number $q_\alpha$ such that:
+Let $\alpha$ in (0,1), the quantile of order $1-\alpha$ of a random variable $X$ is the number $q_\alpha$ such that:
 
 $$\mathbf{P}\left(X\leq q_{\alpha }\right)=1-\alpha$$
 
-Let F denote the CDF of X:
+Let $F$ denote the CDF of $X$:
 
 - $F(q_{\alpha })=1-\alpha$
 - if $F$ is invertible, then $q_{\alpha }=F^{-1}(1-\alpha)$
 - $\mathbf{P}\left(X> q_{\alpha }\right)=\alpha$
-- if $X=Z\sim \mathcal N(0,1)$, then $\mathbf P|X|> q_ {\alpha/2}=\alpha$
+- if $X \sim \mathcal N(0,1)$, then $\mathbf P|X|> q_ {\alpha/2}=\alpha$
 
 Some important quantiles of the $Z\sim \mathcal{N}(0,1)$ are:
 
