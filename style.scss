@@ -27,7 +27,7 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 2000px;
   padding: 0 20px;
   width: 100%;
 }
@@ -527,7 +527,7 @@ nav {
   width: 240px;
   height: 100%;
   left: 30%;
-//   position: fixed;
+  position: fixed;
   z-index: 4;
   padding: 60px 20px 0 20px;
   
