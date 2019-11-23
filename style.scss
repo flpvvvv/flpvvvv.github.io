@@ -27,7 +27,7 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1000px;
   padding: 0 20px;
   width: 100%;
 }
@@ -524,12 +524,12 @@ nav {
 // TOC
 
 .toc {
-  width: 240px;
+  width: 260px;
   height: 100%;
   left: 20%;
   position: fixed;
   z-index: 4;
-  padding: 60px 20px 0 20px;
+  padding: 20px 20px 0 20px;
   
   &:before{
     content:"Table of contents";
