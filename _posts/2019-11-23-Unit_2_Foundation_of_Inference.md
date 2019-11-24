@@ -30,9 +30,9 @@ where:
 - $( \mathbf P_\theta ) _{\theta \in \Theta }$ is a family of probability measured on E
 - $\Theta$ is any set , called *parameter set*.
 
-For example: the statistical model of Bernoulli distribution: $(\{0,1\},(\textsf{Ber}(p))_{p \in (0,1)} )$
+For example: the statistical model of Bernoulli distribution: $(\\{0,1\\},(\textsf{Ber}(p))_{p \in (0,1)} )$
 
- ### Parametric, nonparametric and semiparametric models
+### Parametric, nonparametric and semiparametric models
 Usually, we will assume that the statistical model is well specified, i.e., defined such that $\mathbf P=\mathbf P_\theta$, for some $\theta \subseteq \Theta$. This particular $\theta$ is called the ***true parameter***, and is **unknown**: The aim of the statistical experiment is to estimate $\theta$, or check it’s properties when they have a special meaning.
 
 - if $\Theta \subseteq \mathbb R^d$ for some $d\geq 1$, the model is called **parametric**
@@ -71,10 +71,10 @@ $$\mathbf R(\hat\theta _ n)=\mathbb E[|\hat\theta _ n-\theta|^2]$$
 
 which means: $\text {Quadratic Risk}=\text {Variance}+\text {Bias}^2$
 
-For example: for Bernoulli distribution $(\{0,1\},(\textsf{Ber}(p))_{p \in (0,1)} )$, using $\hat{p }_ n = \overline{X}_ n$ as an estimator for $p$, this estimator is *unbiased*, *consistent*, and its quadratic risk tends to 0 as the sample size $n \to \infty$.
+For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p))\_{p \in (0,1)} )$, using $\hat{p }\_ n = \overline{X}_ n$ as an estimator for $p$, this estimator is *unbiased*, *consistent*, and its quadratic risk tends to 0 as the sample size $n \to \infty$.
 
 ## Confidence Intervals
-Let $\left(E, ( \mathbf P_\theta ) _{\theta \in \Theta }\right)$ be a statistical model based on observations $X_1,X_2,\ldots ,X_ n$ and assume $\Theta \subseteq \mathbb R$. Let $\alpha \in (0,1)$.
+Let $(E, ( \mathbf P\_\theta ) \_{\theta \in \Theta })$ be a statistical model based on observations $X_1,X_2,\ldots ,X_ n$ and assume $\Theta \subseteq \mathbb R$. Let $\alpha \in (0,1)$.
 
 - Confidence interval (C.I.) of level $1-\alpha$ for $\theta$: any random (depending on $X_1,X_2,\ldots ,X_ n$) interval $\mathcal I$ whose boudnaries do not depend on $\theta$ and such that:
 
@@ -86,7 +86,9 @@ Let $\left(E, ( \mathbf P_\theta ) _{\theta \in \Theta }\right)$ be a statistica
 
 Be aware that it is $\mathbf P \geq 1-\alpha$, not $\mathbf P = 1-\alpha$.
 
-For example: for Bernoulli distribution $(\{0,1\},(\textsf{Ber}(p))_{p \in (0,1)} )$, using $\hat{p }_ n = \overline{X}_ n$ as an estimator for $p$, and from CLT:
+For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p))_{p \in (0,1)} )$, 
+
+using $\hat{p }_ n = \overline{X}_ n$ as an estimator for $p$, and from CLT:
 
 $$\sqrt{n}\frac{\overline{X}_ n-p}{\sqrt{p(1-p)}}\xrightarrow [n\rightarrow \infty ]{(d)} \mathcal{N}(0,1)$$
 
@@ -105,7 +107,7 @@ Since $p(1-p)\leq 1/4$, roughly with probability at least $1-\alpha$,
 
 $$\mathcal I_{\textsf {conserv}}=[\overline{X}_ n -\frac {q_{\alpha/2}}{2\sqrt n},\overline{X}_ n +\frac {q_{\alpha/2}}{2\sqrt n}]$$
 
-Indeed: $\lim _{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {conserv}} \ni p)\geq 1-\alpha .$
+Indeed: $\lim \_{n\to \infty } \mathbf{P}( \mathcal I\_{\textsf {conserv}} \ni p)\geq 1-\alpha$
 
 ### Solving the (quadratic) equation for p
 From
@@ -120,7 +122,7 @@ We need to find the roots $p_1<p_2$ of
 
 $$(1+\frac {q_{\alpha/2}^2}{n})p^2-(2\overline{X}_ n+\frac {q_{\alpha/2}^2}{n} )p+\overline{X}_ n^2=0$$
 
-This leads to $\mathcal I_{\textsf {solve}}=[p_1,p_2]$, such that: $\lim _{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {solve}} \ni p)= 1-\alpha .$
+This leads to $\mathcal I\_{\textsf {solve}}=[p_1,p_2]$, such that: $\lim \_{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {solve}} \ni p)= 1-\alpha .$
 
 ### Plug-in
 This method uses the estimated $\hat p$ to calculate the variance.
@@ -133,7 +135,7 @@ This leads to:
 
 $$\mathcal I_{\textsf {plug-in}} =  [\overline{X}_ n-\frac {q_{\alpha/2}\sqrt{\hat p(1-\hat p)}}{\sqrt n},\overline{X}_ n+\frac {q_{\alpha/2}\sqrt{\hat p(1-\hat p)}}{\sqrt n}]$$
 
-such that: $\lim _{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {plug-in}} \ni p)= 1-\alpha .$
+such that: $\lim \_{n\to \infty } \mathbf{P}( \mathcal I\_{\textsf {plug-in}} \ni p)= 1-\alpha .$
 
 ### Meaning of confidence interval
 There is a ***frequentist*** interpretation: 
@@ -152,7 +154,7 @@ Because from the frequentists' point of view, the true parameter $\theta$ is det
 ### Exponential distribution example (1/2)
 Take *Exponential distribution* as an example, PDF: $f(t)=\lambda e^{-\lambda t}, \ \forall t \geq 0$.
 
-Let $X_1, X_2, \ldots , X_ n \stackrel{iid}{\sim } \exp (\lambda )$, and its sample mean: $\overline{X}_ n := \frac{1}{n} \sum _{i = 1}^ n X_ i$. By LLN: $\overline{X}_ n \xrightarrow [n\rightarrow \infty ]{a.s. / \mathbf P} \frac 1\lambda$, because $\mathbb E[X_1]=\frac 1\lambda$.
+Let $X_1, X_2, \ldots , X_ n \stackrel{iid}{\sim } \exp (\lambda )$, and its sample mean: $\overline{X}\_ n := \frac{1}{n} \sum \_{i = 1}^ n X\_ i$. By LLN: $\overline{X}\_ n \xrightarrow [n\rightarrow \infty ]{a.s. / \mathbf P} \frac 1\lambda$, because $\mathbb E[X_1]=\frac 1\lambda$.
 
 So a natural estimator of $\lambda$ is:
 
@@ -206,7 +208,7 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 
 - $H_0$ and in $H_1$do not play a symmetric role: the data is is only used to try to disprove $H_0$
 - In particular lack of evidence, does not mean that $H_0$ is true (“innocent until proven guilty”)
-- A test is a statistic $\psi \in \{0,1\}$ such that:
+- A test is a statistic $\psi \in \\{0,1\\}$ such that:
 	- If $\psi =0$, $H_0$ is not rejected
 	- If $\psi =1$, $H_0$ is rejected
 
@@ -214,7 +216,7 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 
 - **Rejection region** of a test $\psi$:
 
-	$$R_\psi=\{x \in E^n:\psi (x)=1\}$$
+	$$R_\psi=\\{x \in E^n:\psi (x)=1\\}$$
 
 - **Type I error** of a test $\psi$ (rejecting $H_0$ when it is actually true): $\alpha_\psi$
 - **Type II error** of a test $\psi$ (not rejecting $H_0$ although $H_1$ is actually true): $\beta_\psi$
@@ -234,16 +236,16 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 
 - In general, a test has the form:
 
-	$$\psi=\mathbf 1\{T_n>c\}$$
+	$$\psi=\mathbf 1\\{T_n>c\\}$$
 
 	for some statistic $T_n$ and threshold $c \in \mathbb R$
 	
-- $T_n$ is called the **test statistic**. The rejection region is $R_\psi=\{T_n>c\}$
+- $T_n$ is called the **test statistic**. The rejection region is $R_\psi=\\{T_n>c\\}$
 
 ### One-sided vs two-sided tests
 We can refine the terminology when $\theta \in \Theta \subset \mathbb R$ and $H_0$ is of the form:
 
-$$H_0: \theta=\theta_0 \iff \Theta_0=\{ \theta_0\}$$
+$$H_0: \theta=\theta_0 \iff \Theta_0=\\{ \theta_0\\}$$
 
 - If $H_1:\theta \neq \theta_0$: **two-sided test**
 -  if $H_1:\theta > \theta_0$ or $H_1:\theta < \theta_0$: **one-sided test**
