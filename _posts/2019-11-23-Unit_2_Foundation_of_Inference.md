@@ -214,7 +214,7 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 
 - **Rejection region** of a test $\psi$:
 
-	$$R_\psi=\\{x \in E^n:\psi (x)=1\\}$$
+	$$R_\psi=\{x \in E^n:\psi (x)=1\}$$
 
 - **Type I error** of a test $\psi$ (rejecting $H_0$ when it is actually true): $\alpha_\psi$
 - **Type II error** of a test $\psi$ (not rejecting $H_0$ although $H_1$ is actually true): $\beta_\psi$
@@ -234,7 +234,7 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 
 - In general, a test has the form:
 
-	$$\psi=\mathbf 1\\{T_n>c\\}$$
+	$$\psi=\mathbf 1\{T_n>c\}$$
 
 	for some statistic $T_n$ and threshold $c \in \mathbb R$
 	
@@ -243,7 +243,7 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 ### One-sided vs two-sided tests
 We can refine the terminology when $\theta \in \Theta \subset \mathbb R$ and $H_0$ is of the form:
 
-$$H_0: \theta=\theta_0 \iff \Theta_0=\\{ \theta_0\\}$$
+$$H_0: \theta=\theta_0 \iff \Theta_0=\{ \theta_0\}$$
 
 - If $H_1:\theta \neq \theta_0$: **two-sided test**
 -  if $H_1:\theta > \theta_0$ or $H_1:\theta < \theta_0$: **one-sided test**
