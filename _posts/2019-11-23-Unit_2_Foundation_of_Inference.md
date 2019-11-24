@@ -9,8 +9,6 @@ toc: true
 pinned: true
 ---
 
-# Unit 2: Foundation of Inference
-
 The trinity of statistical inference: **estimation**, **confidence intervals** and **testing**.
 
 - **Estimator**: one value whose performance can be measured by consistency, asymptotic normality, bias, variance and quadratic risk.
