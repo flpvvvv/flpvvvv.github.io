@@ -76,14 +76,14 @@ h6 {
   color: $base-lighten-color;
 }
 
-// this part is new added. 20191126
-// h1:after, h2:after {
-//     content: "";
-//     display: block;
-//     position: relative;
-//     top: .33em;
-//     border-bottom: 1px solid hsla(0,0%,50%,.33);
-// }
+// this part is new added. 20191127
+div.entry h1:after, h2:after {
+    content: "";
+    display: block;
+    position: relative;
+    top: .33em;
+    border-bottom: 1px solid hsla(0,0%,50%,.33);
+}
 
 p {
   color: $text-color;
