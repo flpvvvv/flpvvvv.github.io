@@ -6,7 +6,7 @@ Author: flpvvvv
 tags: [Statistics]
 comments: false
 toc: true
-pinned: true
+pinned: false
 ---
 This is my notes of the course **"MITx:  18.6501x Fundamentals of Statistics"** on edX. The session that I participated started on **Sept 2, 2019**. The purpose of this document is to help me remember what I have learnt.
 <!-- more -->
