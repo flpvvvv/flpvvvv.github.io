@@ -6,7 +6,7 @@ Author: flpvvvv
 tags: [Statistics]
 comments: false
 toc: true
-pinned: true
+pinned: false
 ---
 
 The trinity of statistical inference: **estimation**, **confidence intervals** and **testing**.
@@ -28,7 +28,7 @@ where:
 - $( \mathbf P_\theta ) _{\theta \in \Theta }$ is a family of probability measured on E
 - $\Theta$ is any set , called *parameter set*.
 
-For example: the statistical model of Bernoulli distribution: $(\\{0,1\\},(\textsf{Ber}(p))_{p \in (0,1)} )$
+For example: the statistical model of Bernoulli distribution: $(\\{0,1\\},(\textsf{Ber}(p)) _{p \in (0,1)} )$
 
 ### Parametric, nonparametric and semiparametric models
 Usually, we will assume that the statistical model is well specified, i.e., defined such that $\mathbf P=\mathbf P_\theta$, for some $\theta \subseteq \Theta$. This particular $\theta$ is called the ***true parameter***, and is **unknown**: The aim of the statistical experiment is to estimate $\theta$, or check it’s properties when they have a special meaning.
@@ -65,14 +65,15 @@ We want estimators to have **low bias** and **low variance** at the same time.
 
 The **Risk** (or **quadratic risk**) of an estimator $\hat\theta _ n\in \mathbb R$ is
 
-$$\mathbf R(\hat\theta _ n)=\mathbb E[|\hat\theta _ n-\theta|^2]$$
+$$\mathbf R(\hat\theta _ n)=\mathbb E[\vert\hat\theta _ n-\theta\vert^2]$$
 
 which means: $\text {Quadratic Risk}=\text {Variance}+\text {Bias}^2$
 
-For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p))\_{p \in (0,1)} )$, using $\hat{p }\_ n = \overline{X}_ n$ as an estimator for $p$, this estimator is *unbiased*, *consistent*, and its quadratic risk tends to 0 as the sample size $n \to \infty$.
+For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p)) _{p \in (0,1)} )$, using $\hat {p}_ n = \overline{X}_ n$ as an estimator for $p$, this estimator is *unbiased*, *consistent*, and its quadratic risk tends to 0 as the sample size $n \to \infty$.
 
 ## Confidence Intervals
-Let $(E, ( \mathbf P\_\theta ) \_{\theta \in \Theta })$ be a statistical model based on observations $X_1,X_2,\ldots ,X_ n$ and assume $\Theta \subseteq \mathbb R$. Let $\alpha \in (0,1)$.
+
+Let $\left(E, ( \mathbf P_\theta ) _{\theta \in \Theta }\right)$ be a statistical model based on observations $X_1,X_2,\ldots ,X_ n$ and assume $\Theta \subseteq \mathbb R$. Let $\alpha \in (0,1)$.
 
 - Confidence interval (C.I.) of level $1-\alpha$ for $\theta$: any random (depending on $X_1,X_2,\ldots ,X_ n$) interval $\mathcal I$ whose boudnaries do not depend on $\theta$ and such that:
 
@@ -84,9 +85,7 @@ Let $(E, ( \mathbf P\_\theta ) \_{\theta \in \Theta })$ be a statistical model b
 
 Be aware that it is $\mathbf P \geq 1-\alpha$, not $\mathbf P = 1-\alpha$.
 
-For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p))_{p \in (0,1)} )$, 
-
-using $\hat{p }_ n = \overline{X}_ n$ as an estimator for $p$, and from CLT:
+For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p)) _{p \in (0,1)} )$, using $\hat{p }_ n = \overline{X}_ n$ as an estimator for $p$, and from CLT:
 
 $$\sqrt{n}\frac{\overline{X}_ n-p}{\sqrt{p(1-p)}}\xrightarrow [n\rightarrow \infty ]{(d)} \mathcal{N}(0,1)$$
 
@@ -105,7 +104,7 @@ Since $p(1-p)\leq 1/4$, roughly with probability at least $1-\alpha$,
 
 $$\mathcal I_{\textsf {conserv}}=[\overline{X}_ n -\frac {q_{\alpha/2}}{2\sqrt n},\overline{X}_ n +\frac {q_{\alpha/2}}{2\sqrt n}]$$
 
-Indeed: $\lim \_{n\to \infty } \mathbf{P}( \mathcal I\_{\textsf {conserv}} \ni p)\geq 1-\alpha$
+Indeed: $\lim _{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {conserv}} \ni p)\geq 1-\alpha .$
 
 ### Solving the (quadratic) equation for p
 From
@@ -120,7 +119,7 @@ We need to find the roots $p_1<p_2$ of
 
 $$(1+\frac {q_{\alpha/2}^2}{n})p^2-(2\overline{X}_ n+\frac {q_{\alpha/2}^2}{n} )p+\overline{X}_ n^2=0$$
 
-This leads to $\mathcal I\_{\textsf {solve}}=[p_1,p_2]$, such that: $\lim \_{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {solve}} \ni p)= 1-\alpha .$
+This leads to $\mathcal I_{\textsf {solve}}=[p_1,p_2]$, such that: $\lim _{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {solve}} \ni p)= 1-\alpha$.
 
 ### Plug-in
 This method uses the estimated $\hat p$ to calculate the variance.
@@ -133,7 +132,7 @@ This leads to:
 
 $$\mathcal I_{\textsf {plug-in}} =  [\overline{X}_ n-\frac {q_{\alpha/2}\sqrt{\hat p(1-\hat p)}}{\sqrt n},\overline{X}_ n+\frac {q_{\alpha/2}\sqrt{\hat p(1-\hat p)}}{\sqrt n}]$$
 
-such that: $\lim \_{n\to \infty } \mathbf{P}( \mathcal I\_{\textsf {plug-in}} \ni p)= 1-\alpha .$
+such that: $\lim _{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {plug-in}} \ni p)= 1-\alpha .$
 
 ### Meaning of confidence interval
 There is a ***frequentist*** interpretation: 
@@ -148,11 +147,16 @@ Because from the frequentists' point of view, the true parameter $\theta$ is det
 
 > The expectation of that Bernoulli distribution is 95%.
 
+### Steps to find a confidence interval
+1. Find an estimator for $\hat\theta$ for $\theta$
+2. Determine the (asymptotic) distribution of $\hat\theta$
+3. Compute a confidence interval for $\theta$  based on $\hat\theta$ with level $\alpha$ 
+
 ## Delta method
 ### Exponential distribution example (1/2)
 Take *Exponential distribution* as an example, PDF: $f(t)=\lambda e^{-\lambda t}, \ \forall t \geq 0$.
 
-Let $X_1, X_2, \ldots , X_ n \stackrel{iid}{\sim } \exp (\lambda )$, and its sample mean: $\overline{X}\_ n := \frac{1}{n} \sum \_{i = 1}^ n X\_ i$. By LLN: $\overline{X}\_ n \xrightarrow [n\rightarrow \infty ]{a.s. / \mathbf P} \frac 1\lambda$, because $\mathbb E[X_1]=\frac 1\lambda$.
+Let $X_1, X_2, \ldots , X_ n \stackrel{iid}{\sim } \exp (\lambda )$, and its sample mean: $\overline{X}_ n := \frac{1}{n} \sum _{i = 1}^ n X_ i$. By LLN: $\overline{X}_ n \xrightarrow [n\rightarrow \infty ]{a.s. / \mathbf P} \frac 1\lambda$, because $\mathbb E[X_1]=\frac 1\lambda$.
 
 So a natural estimator of $\lambda$ is:
 
@@ -169,13 +173,13 @@ $$\sqrt{n}(\overline{X}_ n -\frac 1\lambda ) \xrightarrow [n \to \infty ]{(d)}\m
 How does the CLT transfer to $\hat\lambda$? How to find an asymptotic confidence interval for $\lambda$? Here we need to use the **Delta method**.
 
 ### The Delta method
-Let $(Z_n)_{n \geq 1}$ sequence of r.v. that satisfies
+Let $(Z_n) _{n \geq 1}$ sequence of r.v. that satisfies
 
 $$\sqrt{n}(Z_ n - \theta ) \xrightarrow [n \to \infty ]{(d)}\mathcal{N}(0,\sigma^2)$$
 
-for some $\theta \in \mathbb R$ and $\sigma^2>0$ (the sequence $(Z_n)_{n \geq 1}$ is said to be asymptotically normal around $\theta$).
+for some $\theta \in \mathbb R$ and $\sigma^2>0$ (the sequence $(Z_n) _{n \geq 1}$ is said to be asymptotically normal around $\theta$).
 
-Let $g:\mathbb R \to \mathbb R$ be continuously differentiable at the point $\theta$. Then, $(g(Z_n))_{n \geq 1}$ is also asymptotically normal around $g(\theta)$; More precisely:
+Let $g:\mathbb R \to \mathbb R$ be continuously differentiable at the point $\theta$. Then, $(g(Z_n)) _{n \geq 1}$ is also asymptotically normal around $g(\theta)$; More precisely:
 
 $$\sqrt{n}(g(Z_ n) - g(\theta) ) \xrightarrow [n \to \infty ]{(d)}\mathcal{N}(0,(g'(\theta))^2\sigma^2)$$
 
@@ -214,7 +218,7 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 
 - **Rejection region** of a test $\psi$:
 
-	$$R_\psi=\{x \in E^n:\psi (x)=1\}$$
+	$$R_\psi=\\{x \in E^n:\psi (x)=1\\}$$
 
 - **Type I error** of a test $\psi$ (rejecting $H_0$ when it is actually true): $\alpha_\psi$
 - **Type II error** of a test $\psi$ (not rejecting $H_0$ although $H_1$ is actually true): $\beta_\psi$
@@ -234,7 +238,7 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 
 - In general, a test has the form:
 
-	$$\psi=\mathbf 1\{T_n>c\}$$
+	$$\psi=\mathbf 1\\{T_n>c\\}$$
 
 	for some statistic $T_n$ and threshold $c \in \mathbb R$
 	
@@ -243,7 +247,7 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 ### One-sided vs two-sided tests
 We can refine the terminology when $\theta \in \Theta \subset \mathbb R$ and $H_0$ is of the form:
 
-$$H_0: \theta=\theta_0 \iff \Theta_0=\{ \theta_0\}$$
+$$H_0: \theta=\theta_0 \iff \Theta_0=\\{ \theta_0\\}$$
 
 - If $H_1:\theta \neq \theta_0$: **two-sided test**
 -  if $H_1:\theta > \theta_0$ or $H_1:\theta < \theta_0$: **one-sided test**
@@ -254,3 +258,10 @@ The (asymptotic) p-value of a test $\alpha_\psi$ is the smallest (asymptotic) le
 $\text {p-value} \leq \alpha \iff H_0$ is rejected by $\psi_\alpha$, at the (asymptotic) level $\alpha$
 
 **The smaller the p-value, the more confidently one can reject $H_0$.**
+
+### Steps of hypothesis testing
+
+1. Find estimators
+2. Find **pivot** and determine the distribution of pivot. Write some statistic $T_n$, and let $\psi=\mathbf 1\\{T_n>c\\}$
+> It is pivot if we can manage to write it down in such a way that it's distribution under the null hypothesis is known and does not depend on any additional parameters. 
+3. Adjust $c$ to match level $\alpha$.
