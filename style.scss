@@ -17,6 +17,10 @@
 
 html {
   font-size: $base-font-size;
+
+  @include mobile {
+    font-size: $mobile-base-font-size;
+  }
 }
 
 body {
