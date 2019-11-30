@@ -69,7 +69,7 @@ $$\mathbf R(\hat\theta _ n)=\mathbb E[\vert\hat\theta _ n-\theta\vert^2]$$
 
 which means: $\text {Quadratic Risk}=\text {Variance}+\text {Bias}^2$
 
-For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p)) _{p \in (0,1)} )$, using $\hat {p}_ n = \overline{X}_ n$ as an estimator for $p$, this estimator is *unbiased*, *consistent*, and its quadratic risk tends to 0 as the sample size $n \to \infty$.
+For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p)) _ {p \in (0,1)} )$, using $\hat {p} _ n = \overline{X} _ n$ as an estimator for $p$, this estimator is *unbiased*, *consistent*, and its quadratic risk tends to 0 as the sample size $n \to \infty$.
 
 ## Confidence Intervals
 
