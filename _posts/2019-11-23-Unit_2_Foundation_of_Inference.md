@@ -9,6 +9,8 @@ toc: true
 pinned: false
 ---
 
+# Unit 2: Foundation of Inference
+
 The trinity of statistical inference: **estimation**, **confidence intervals** and **testing**.
 
 - **Estimator**: one value whose performance can be measured by consistency, asymptotic normality, bias, variance and quadratic risk.
@@ -20,15 +22,15 @@ Formal definition:
 
 Let the observed outcome of a statistical experiment be a sample$X_1,X_2,\ldots ,X_ n$ of n i.i.d. random variables in some measurable space $E$ (usually $E \subseteq \mathbb R$) and denote by $\mathbf P$ their common distribution. A statistical model associated to that statistical experiment is a pair:
 
-$$\left(E, ( \mathbf P_\theta ) _{\theta \in \Theta }\right)$$
+$$\left(E, ( \mathbf P_\theta ) _ {\theta \in \Theta }\right)$$
 
 where:
 
 - $E$ is called *sample space* 
-- $( \mathbf P_\theta ) _{\theta \in \Theta }$ is a family of probability measured on E
+- $( \mathbf P_\theta ) _ {\theta \in \Theta }$ is a family of probability measured on E
 - $\Theta$ is any set , called *parameter set*.
 
-For example: the statistical model of Bernoulli distribution: $(\\{0,1\\},(\textsf{Ber}(p)) _{p \in (0,1)} )$
+For example: the statistical model of Bernoulli distribution: $(\\{0,1\\},(\textsf{Ber}(p)) _ {p \in (0,1)} )$
 
 ### Parametric, nonparametric and semiparametric models
 Usually, we will assume that the statistical model is well specified, i.e., defined such that $\mathbf P=\mathbf P_\theta$, for some $\theta \subseteq \Theta$. This particular $\theta$ is called the ***true parameter***, and is **unknown**: The aim of the statistical experiment is to estimate $\theta$, or check it’s properties when they have a special meaning.
@@ -40,11 +42,11 @@ Usually, we will assume that the statistical model is well specified, i.e., defi
 ### Identifiability
 The parameter $\theta$ is called *identifiable* iff the map $\theta \in \Theta \mapsto \mathbf P_\theta$ is injective, i.e.:
 
-$$\theta \neq \theta ' \Rightarrow \mathbf P_\theta \neq \mathbf P_{\theta '}$$
+$$\theta \neq \theta ' \Rightarrow \mathbf P_\theta \neq \mathbf P_ {\theta '}$$
 
 or equivalently:
 
-$$\mathbf P_\theta = \mathbf P_{\theta '} \Rightarrow \theta = \theta ' $$
+$$\mathbf P_\theta = \mathbf P_ {\theta '} \Rightarrow \theta = \theta ' $$
 
 ## Estimation
 
@@ -73,7 +75,7 @@ For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p)) _ {p \in (
 
 ## Confidence Intervals
 
-Let $\left(E, ( \mathbf P_\theta ) _{\theta \in \Theta }\right)$ be a statistical model based on observations $X_1,X_2,\ldots ,X_ n$ and assume $\Theta \subseteq \mathbb R$. Let $\alpha \in (0,1)$.
+Let $\left(E, ( \mathbf P_\theta ) _ {\theta \in \Theta }\right)$ be a statistical model based on observations $X_1,X_2,\ldots ,X_ n$ and assume $\Theta \subseteq \mathbb R$. Let $\alpha \in (0,1)$.
 
 - Confidence interval (C.I.) of level $1-\alpha$ for $\theta$: any random (depending on $X_1,X_2,\ldots ,X_ n$) interval $\mathcal I$ whose boudnaries do not depend on $\theta$ and such that:
 
@@ -81,58 +83,58 @@ Let $\left(E, ( \mathbf P_\theta ) _{\theta \in \Theta }\right)$ be a statistica
 
 - C.I. of *asymptotic level* $1-\alpha$ for $\theta$: any random interval $\mathcal I$ whose boundaries do not depend on $\theta$ and such that:
 
-	$$\lim _{n\to \infty } \mathbf{P} [\mathcal I\ni \theta]\geq 1-\alpha, \quad \forall \theta \in \Theta$$
+	$$\lim _ {n\to \infty } \mathbf{P} [\mathcal I\ni \theta]\geq 1-\alpha, \quad \forall \theta \in \Theta$$
 
 Be aware that it is $\mathbf P \geq 1-\alpha$, not $\mathbf P = 1-\alpha$.
 
-For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p)) _{p \in (0,1)} )$, using $\hat{p }_ n = \overline{X}_ n$ as an estimator for $p$, and from CLT:
+For example: for Bernoulli distribution $(\\{0,1\\},(\textsf{Ber}(p)) _ {p \in (0,1)} )$, using $\hat{p } _ n = \overline{X} _ n$ as an estimator for $p$, and from CLT:
 
-$$\sqrt{n}\frac{\overline{X}_ n-p}{\sqrt{p(1-p)}}\xrightarrow [n\rightarrow \infty ]{(d)} \mathcal{N}(0,1)$$
+$$\sqrt{n}\frac{\overline{X} _ n-p}{\sqrt{p(1-p)}}\xrightarrow [n\rightarrow \infty ]{(d)} \mathcal{N}(0,1)$$
 
-For a fixed $\alpha \in (0,1)$, if $q_{\alpha/2}$ is the $(1-\alpha/2$)-quantile of $\mathcal{N}(0,1)$, then with probability $\simeq 1-\alpha$ (if $n$ is large enough),
+For a fixed $\alpha \in (0,1)$, if $q_ {\alpha/2}$ is the $(1-\alpha/2$)-quantile of $\mathcal{N}(0,1)$, then with probability $\simeq 1-\alpha$ (if $n$ is large enough),
 
-$$\overline{X}_ n \in [p-\frac {q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt n},p+\frac {q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt n}]$$
+$$\overline{X} _ n \in [p-\frac {q_ {\alpha/2}\sqrt{p(1-p)}}{\sqrt n},p+\frac {q_ {\alpha/2}\sqrt{p(1-p)}}{\sqrt n}]$$
 
 It yields:
 
-$$\lim _{n\to \infty } \mathbf{P}( [\overline{X}_ n-\frac {q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt n},\overline{X}_ n+\frac {q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt n}] \ni p)=1-\alpha .$$
+$$\lim _ {n\to \infty } \mathbf{P}( [\overline{X} _ n-\frac {q_ {\alpha/2}\sqrt{p(1-p)}}{\sqrt n},\overline{X} _ n+\frac {q_ {\alpha/2}\sqrt{p(1-p)}}{\sqrt n}] \ni p)=1-\alpha .$$
 
 But it is **not** a confidence interval, because it depends on p !! Three solutions are presented below.
 
 ### Conservative bound
 Since $p(1-p)\leq 1/4$, roughly with probability at least $1-\alpha$,
 
-$$\mathcal I_{\textsf {conserv}}=[\overline{X}_ n -\frac {q_{\alpha/2}}{2\sqrt n},\overline{X}_ n +\frac {q_{\alpha/2}}{2\sqrt n}]$$
+$$\mathcal I_ {\textsf {conserv}}=[\overline{X} _ n -\frac {q_ {\alpha/2}}{2\sqrt n},\overline{X} _ n +\frac {q_ {\alpha/2}}{2\sqrt n}]$$
 
-Indeed: $\lim _{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {conserv}} \ni p)\geq 1-\alpha .$
+Indeed: $\lim _ {n\to \infty } \mathbf{P}( \mathcal I_ {\textsf {conserv}} \ni p)\geq 1-\alpha .$
 
 ### Solving the (quadratic) equation for p
 From
 
-$$\overline{X}_ n-\frac {q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt n} \leq p \leq \overline{X}_ n+\frac {q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt n}$$
+$$\overline{X} _ n-\frac {q_ {\alpha/2}\sqrt{p(1-p)}}{\sqrt n} \leq p \leq \overline{X} _ n+\frac {q_ {\alpha/2}\sqrt{p(1-p)}}{\sqrt n}$$
 
 we can get
 
-$$(p-\overline{X}_ n)^2\leq \frac {q_{\alpha/2}^2p(1-p)}{n} $$
+$$(p-\overline{X} _ n)^2\leq \frac {q_ {\alpha/2}^2p(1-p)}{n} $$
 
 We need to find the roots $p_1<p_2$ of
 
-$$(1+\frac {q_{\alpha/2}^2}{n})p^2-(2\overline{X}_ n+\frac {q_{\alpha/2}^2}{n} )p+\overline{X}_ n^2=0$$
+$$(1+\frac {q_ {\alpha/2}^2}{n})p^2-(2\overline{X} _ n+\frac {q_ {\alpha/2}^2}{n} )p+\overline{X} _ n^2=0$$
 
-This leads to $\mathcal I_{\textsf {solve}}=[p_1,p_2]$, such that: $\lim _{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {solve}} \ni p)= 1-\alpha$.
+This leads to $\mathcal I_ {\textsf {solve}}=[p_1,p_2]$, such that: $\lim _ {n\to \infty } \mathbf{P}( \mathcal I_ {\textsf {solve}} \ni p)= 1-\alpha$.
 
 ### Plug-in
 This method uses the estimated $\hat p$ to calculate the variance.
 
-By LLN: $\hat p=\overline{X}_ n\xrightarrow [n\rightarrow \infty ]{\mathbf P,\ a.s.} p$, and by Slutsky: 
+By LLN: $\hat p=\overline{X} _ n\xrightarrow [n\rightarrow \infty ]{\mathbf P,\ a.s.} p$, and by Slutsky: 
 
-$$\sqrt{n}\frac{\overline{X}_ n-p}{\sqrt{\hat p(1-\hat p)}}\xrightarrow [n\rightarrow \infty ]{(d)} \mathcal{N}(0,1)$$
+$$\sqrt{n}\frac{\overline{X} _ n-p}{\sqrt{\hat p(1-\hat p)}}\xrightarrow [n\rightarrow \infty ]{(d)} \mathcal{N}(0,1)$$
 
 This leads to:
 
-$$\mathcal I_{\textsf {plug-in}} =  [\overline{X}_ n-\frac {q_{\alpha/2}\sqrt{\hat p(1-\hat p)}}{\sqrt n},\overline{X}_ n+\frac {q_{\alpha/2}\sqrt{\hat p(1-\hat p)}}{\sqrt n}]$$
+$$\mathcal I_ {\textsf {plug-in}} =  [\overline{X} _ n-\frac {q_ {\alpha/2}\sqrt{\hat p(1-\hat p)}}{\sqrt n},\overline{X} _ n+\frac {q_ {\alpha/2}\sqrt{\hat p(1-\hat p)}}{\sqrt n}]$$
 
-such that: $\lim _{n\to \infty } \mathbf{P}( \mathcal I_{\textsf {plug-in}} \ni p)= 1-\alpha .$
+such that: $\lim _ {n\to \infty } \mathbf{P}( \mathcal I_ {\textsf {plug-in}} \ni p)= 1-\alpha .$
 
 ### Meaning of confidence interval
 There is a ***frequentist*** interpretation: 
@@ -156,11 +158,11 @@ Because from the frequentists' point of view, the true parameter $\theta$ is det
 ### Exponential distribution example (1/2)
 Take *Exponential distribution* as an example, PDF: $f(t)=\lambda e^{-\lambda t}, \ \forall t \geq 0$.
 
-Let $X_1, X_2, \ldots , X_ n \stackrel{iid}{\sim } \exp (\lambda )$, and its sample mean: $\overline{X}_ n := \frac{1}{n} \sum _{i = 1}^ n X_ i$. By LLN: $\overline{X}_ n \xrightarrow [n\rightarrow \infty ]{a.s. / \mathbf P} \frac 1\lambda$, because $\mathbb E[X_1]=\frac 1\lambda$.
+Let $X_1, X_2, \ldots , X_ n \stackrel{iid}{\sim } \exp (\lambda )$, and its sample mean: $\overline{X} _ n := \frac{1}{n} \sum _ {i = 1}^ n X_ i$. By LLN: $\overline{X} _ n \xrightarrow [n\rightarrow \infty ]{a.s. / \mathbf P} \frac 1\lambda$, because $\mathbb E[X_1]=\frac 1\lambda$.
 
 So a natural estimator of $\lambda$ is:
 
-$$\hat\lambda:=\frac 1{\overline{X}_ n}$$
+$$\hat\lambda:=\frac 1{\overline{X} _ n}$$
 
 Hence: $\hat\lambda \xrightarrow [n\rightarrow \infty ]{a.s. / \mathbf P} \lambda$.
 
@@ -168,18 +170,18 @@ Be careful that, $\mathbb E[\frac 1{X_1}]>\frac 1{\mathbb E[X_1]}=\lambda$.
 
 By CLT:
 
-$$\sqrt{n}(\overline{X}_ n -\frac 1\lambda ) \xrightarrow [n \to \infty ]{(d)}\mathcal{N}(0,\lambda^{-2})$$
+$$\sqrt{n}(\overline{X} _ n -\frac 1\lambda ) \xrightarrow [n \to \infty ]{(d)}\mathcal{N}(0,\lambda^{-2})$$
 
 How does the CLT transfer to $\hat\lambda$? How to find an asymptotic confidence interval for $\lambda$? Here we need to use the **Delta method**.
 
 ### The Delta method
-Let $(Z_n) _{n \geq 1}$ sequence of r.v. that satisfies
+Let $(Z_n) _ {n \geq 1}$ sequence of r.v. that satisfies
 
 $$\sqrt{n}(Z_ n - \theta ) \xrightarrow [n \to \infty ]{(d)}\mathcal{N}(0,\sigma^2)$$
 
-for some $\theta \in \mathbb R$ and $\sigma^2>0$ (the sequence $(Z_n) _{n \geq 1}$ is said to be asymptotically normal around $\theta$).
+for some $\theta \in \mathbb R$ and $\sigma^2>0$ (the sequence $(Z_n) _ {n \geq 1}$ is said to be asymptotically normal around $\theta$).
 
-Let $g:\mathbb R \to \mathbb R$ be continuously differentiable at the point $\theta$. Then, $(g(Z_n)) _{n \geq 1}$ is also asymptotically normal around $g(\theta)$; More precisely:
+Let $g:\mathbb R \to \mathbb R$ be continuously differentiable at the point $\theta$. Then, $(g(Z_n)) _ {n \geq 1}$ is also asymptotically normal around $g(\theta)$; More precisely:
 
 $$\sqrt{n}(g(Z_ n) - g(\theta) ) \xrightarrow [n \to \infty ]{(d)}\mathcal{N}(0,(g'(\theta))^2\sigma^2)$$
 
@@ -190,14 +192,14 @@ $$\sqrt{n}(\hat\lambda -\lambda ) \xrightarrow [n \to \infty ]{(d)}\mathcal{N}(0
 
 To calculate the asymptotic confidence interval for $\lambda$:
 
-$$[\hat\lambda -\frac {q_{\alpha/2}\lambda}{\sqrt n},\hat\lambda +\frac {q_{\alpha/2}\lambda}{\sqrt n}]$$
+$$[\hat\lambda -\frac {q_ {\alpha/2}\lambda}{\sqrt n},\hat\lambda +\frac {q_ {\alpha/2}\lambda}{\sqrt n}]$$
 
 Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lambda$.
 
 ## Hypothesis testing
 ### Statistical formulation
 
-- Consider a sample $X_1,X_2,\ldots ,X_ n$ of i.i.d. random variables and a statistical model $\left(E, ( \mathbf P_\theta ) _{\theta \in \Theta }\right)$
+- Consider a sample $X_1,X_2,\ldots ,X_ n$ of i.i.d. random variables and a statistical model $\left(E, ( \mathbf P_\theta ) _ {\theta \in \Theta }\right)$
 - Let $\Theta _0$ and $\Theta _1$ be disjoint subsets of $\Theta$
 - Consider the two hypotheses:
 	- $H_0: \theta \in \Theta _0$
@@ -218,13 +220,13 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 
 - **Rejection region** of a test $\psi$:
 
-	$$R_\psi=\\{x \in E^n:\psi (x)=1\\}$$
+	$$R_\psi=\{x \in E^n:\psi (x)=1\}$$
 
 - **Type I error** of a test $\psi$ (rejecting $H_0$ when it is actually true): $\alpha_\psi$
 - **Type II error** of a test $\psi$ (not rejecting $H_0$ although $H_1$ is actually true): $\beta_\psi$
 - Power of a test $\psi$:
 
-	$$\pi_\psi=\inf\limits_{\theta \in \Theta_1}(1-\beta_\psi(\theta))$$
+	$$\pi_\psi=\inf\limits_ {\theta \in \Theta_1}(1-\beta_\psi(\theta))$$
 
 ### Level, test statistic and rejection region
 
@@ -234,11 +236,11 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 
 - A test has **asymptotic level** $\alpha$ if:
 
-	$$\lim_{n \to \infty}\alpha_{\psi _ n}(\theta) \leq \alpha, \quad \forall \theta \in \Theta_0$$
+	$$\lim_ {n \to \infty}\alpha_ {\psi _ n}(\theta) \leq \alpha, \quad \forall \theta \in \Theta_0$$
 
 - In general, a test has the form:
 
-	$$\psi=\mathbf 1\\{T_n>c\\}$$
+	$$\psi=\mathbf 1\{T_n>c\}$$
 
 	for some statistic $T_n$ and threshold $c \in \mathbb R$
 	
@@ -247,7 +249,7 @@ Then we can use "Solve" or "Plug-in" method to get confidence interval for $\lam
 ### One-sided vs two-sided tests
 We can refine the terminology when $\theta \in \Theta \subset \mathbb R$ and $H_0$ is of the form:
 
-$$H_0: \theta=\theta_0 \iff \Theta_0=\\{ \theta_0\\}$$
+$$H_0: \theta=\theta_0 \iff \Theta_0=\{ \theta_0\}$$
 
 - If $H_1:\theta \neq \theta_0$: **two-sided test**
 -  if $H_1:\theta > \theta_0$ or $H_1:\theta < \theta_0$: **one-sided test**
