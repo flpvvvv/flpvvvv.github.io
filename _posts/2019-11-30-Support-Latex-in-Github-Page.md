@@ -9,7 +9,7 @@ toc: false
 pinned: false
 ---
 
-Recently, I started to use Github Page to write a summary on a course that I followed in Edx about Statistics. I am using **Jekyll** to create static websites. In order to insert lots of math equations, I am using **Mathjax**. 
+Recently, I started to use Github Page to write a summary on a course that I followed on Edx about Statistics. I am using **Jekyll** to create static websites. In order to insert lots of math equations, I am using **Mathjax**. 
 
 You can add these scripts in the **head** to import Mathjax:
 ~~~~
@@ -39,6 +39,7 @@ what you want to show | What you should enter
 `|` | `\vert`
 `{` | `\\{`
 `}` | `\\}`
-`)_` *(underscore)* | `)\_` or add a space between `\` and `_` 
-
-
+`)_` *(underscore)* | `)\_` or add a space between `)` and `_` 
+`_(` *(underscore)* | `\_(` or add a space between `_` and `(` 
+`}_` *(underscore)* | `}\_` or add a space between `}` and `_` 
+`_{` *(underscore)* | `\_{` or add a space between `_` and `{` 
