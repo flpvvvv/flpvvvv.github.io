@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: Support Latex in Github Page to show math equations
 date: 2019-11-30
@@ -6,7 +6,7 @@ Author: flpvvvv
 tags: [Github Page,Bug]
 comments: false
 toc: false
-pinned: true
+pinned: false
 ---
 
 Recently, I started to use Github Page to write a summary on a course that I followed in Edx about Statistics. I am using **Jekyll** to create static websites. In order to insert lots of math equations, I am using **Mathjax**. 
