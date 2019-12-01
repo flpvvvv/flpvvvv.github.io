@@ -518,7 +518,8 @@ nav {
 }
 
 .posts > .post {
-  padding-bottom: 2em;
+//   padding-bottom: 2em;
+  padding-bottom: .5em;
   border-bottom: 1px solid $divider-color;
 }
 
@@ -547,6 +548,8 @@ nav {
 
   h1 {
     margin-bottom: .1em;
+    margin-top: .5em;
+    font-size: 1.5em;
   }
 
 
