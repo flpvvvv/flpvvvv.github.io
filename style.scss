@@ -328,6 +328,14 @@ img {
   max-width: none;
 }
 
+// Image in the post, only show 60%, and centered
+// added 2019.12.05
+.entry img {
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 // Specify the color of the selection
 ::-moz-selection {
 //  color: $selection-color;
