@@ -31,9 +31,14 @@ body {
 
 .container {
   margin: 0 auto;
+  min-width: 200px;
   max-width: 980px;
-  padding: 0 20px;
+  padding: 0 45px;
   width: 100%;
+	
+  @include mobile {
+      padding: 0 20px;
+    }
 }
 
 // center the sidebar and navlist
