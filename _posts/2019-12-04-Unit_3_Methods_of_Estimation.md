@@ -152,7 +152,7 @@ $$\hat\theta _ n ^{\text {MLE}} = \argmax _ {\theta \in \Theta} \, \ln [L(x_1, \
 
 For example: Maximum Likelihood Estimator of a **Poisson Statistical Model**. Let $X_1, \ldots , X_ n \stackrel{iid}{\sim } \text {Poiss}(\lambda ^*)$ for some unknown $\lambda ^* \in (0,\infty )$. The associated statistical model is $(\mathbb {N} \cup \\{ 0\\} , \\{ \text {Poiss}(\lambda )\\} _ {\lambda \in (0,\infty )})$. Likelihood of a Poisson Statistical Model can be written:
 
-$$L_ n(x_1, \ldots , x_ n, \lambda ) = \prod _{i = 1}^ n e^{-\lambda } \frac{\lambda ^{x_ i}}{{x_ i}!} = e^{-n \lambda } \frac{\lambda ^{\sum _{i = 1}^ n x_ i}}{x_1 ! \cdots x_ n !}$$
+$$L_ n(x_1, \ldots , x_ n, \lambda ) = \prod _{i = 1}^ n e^{-\lambda } \frac{\lambda ^{x_ i}}{ {x_ i}!} = e^{-n \lambda } \frac{\lambda ^{\sum _{i = 1}^ n x_ i}}{x_1 ! \cdots x_ n !}$$
 
 And the log-likelihood is: $\ell (\lambda ) := \ln L _ n(x_1, \ldots , x _ n, \lambda )$.
 
