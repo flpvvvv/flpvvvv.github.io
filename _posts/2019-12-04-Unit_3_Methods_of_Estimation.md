@@ -94,7 +94,7 @@ $$
 \end{aligned}
 $$
 
-The left part $\mathbb E _ {\theta^*}[\ln {p _ {\theta^*}(X)}]$ is a constant $C$. The right part can be estimated by an average, by the Law of Large Number (LLN). So the KL estimator can be written as below:
+The left part $\mathbb E _ {\theta^\*}[\ln {p _ {\theta^\*}(X)}]$ is a constant $C$. The right part can be estimated by an average, by the Law of Large Number (LLN). So the KL estimator can be written as below:
 
 $$
 \widehat{\text {KL}}(\mathbf {P _ {\theta^*}}, \mathbf {P _ {\theta}}) = C-\frac 1n\sum _{i = 1}^ n \ln (p_\theta (X_ i))
@@ -104,9 +104,9 @@ We want to solve:
 
 $$
 \begin{aligned}
-\min _{\theta \in \Theta} \, \widehat{\text {KL}}(\mathbf {P _ {\theta^*}}, \mathbf {P _ {\theta}}) &\Harr \max _ {\theta \in \Theta} \, \frac 1n\sum _ {i = 1}^ n \ln (p_\theta (X_ i)) \\
-&\Harr \max _ {\theta \in \Theta} \, \ln [\prod _ {i = 1}^ n (p_\theta (X_ i))] \\
-&\Harr \max _ {\theta \in \Theta} \, \prod _ {i = 1}^ n (p_\theta (X_ i))
+\min _{\theta \in \Theta} \, \widehat{\text {KL}}(\mathbf {P _ {\theta^*}}, \mathbf {P _ {\theta}}) &\Leftrightarrow \max _ {\theta \in \Theta} \, \frac 1n\sum _ {i = 1}^ n \ln (p_\theta (X_ i)) \\
+&\Leftrightarrow \max _ {\theta \in \Theta} \, \ln [\prod _ {i = 1}^ n (p_\theta (X_ i))] \\
+&\Leftrightarrow \max _ {\theta \in \Theta} \, \prod _ {i = 1}^ n (p_\theta (X_ i))
 \end{aligned}
 $$
 
@@ -141,16 +141,16 @@ The **maximum likelihood estimator** for $\theta^*$ is defined to be:
 
 $$
 \begin{aligned}
-\hat\theta _ n ^{\text {MLE}} &= \argmax _ {\theta \in \Theta} \, L(x_1, \ldots , x_ n, \theta)\\
-&= \argmax _ {\theta \in \Theta} \left( \prod _ {i = 1}^ n p _ \theta (X_ i) \right)
+\hat\theta _ n ^{\text {MLE}} &= \arg\max _ {\theta \in \Theta} \, L(x_1, \ldots , x_ n, \theta)\\
+&= \arg\max _ {\theta \in \Theta} \left( \prod _ {i = 1}^ n p _ \theta (X_ i) \right)
 \end{aligned}
 $$
 
 And in practice, we use a lot the **log-likelihood estimator**:
 
-$$\hat\theta _ n ^{\text {MLE}} = \argmax _ {\theta \in \Theta} \, \ln [L(x_1, \ldots , x_ n, \theta)]$$
+$$\hat\theta _ n ^{\text {MLE}} = \arg\max _ {\theta \in \Theta} \, \ln [L(x_1, \ldots , x_ n, \theta)]$$
 
-For example: Maximum Likelihood Estimator of a **Poisson Statistical Model**. Let $X_1, \ldots , X_ n \stackrel{iid}{\sim } \text {Poiss}(\lambda ^*)$ for some unknown $\lambda ^* \in (0,\infty )$. The associated statistical model is $(\mathbb {N} \cup \\{ 0\\} , \\{ \text {Poiss}(\lambda )\\} _ {\lambda \in (0,\infty )})$. Likelihood of a Poisson Statistical Model can be written:
+For example: Maximum Likelihood Estimator of a **Poisson Statistical Model**. Let $X_1, \ldots , X_ n \stackrel{iid}{\sim } \text {Poiss}(\lambda ^\*)$ for some unknown $\lambda ^\* \in (0,\infty )$. The associated statistical model is $(\mathbb {N} \cup \\{ 0\\} , \\{ \text {Poiss}(\lambda )\\} _ {\lambda \in (0,\infty )})$. Likelihood of a Poisson Statistical Model can be written:
 
 $$L_ n(x_1, \ldots , x_ n, \lambda ) = \prod _{i = 1}^ n e^{-\lambda } \frac{\lambda ^{x_ i}}{ {x_ i}!} = e^{-n \lambda } \frac{\lambda ^{\sum _{i = 1}^ n x_ i}}{x_1 ! \cdots x_ n !}$$
 
@@ -164,7 +164,7 @@ and if we set the above equation to 0, we can get: $\hat\lambda _ n ^{\text {MLE
 
 ### Consistency of MLE
 
-Given i.i.d samples $X_1, \ldots , X _ n\sim \mathbf{P} _ {\theta ^*}$ and an associated statistical model $\left(E,\\{ \mathbf{P} _\theta \\} _ {\theta \in \Theta }\right)$, the maximum likelihood estimator $\hat{\theta } _ n^{\text {MLE}}$ of $\theta^*$ is a **consistent** estimator under mild regularity conditions (e.g. continuity in $\theta$ of the pdf $p_\theta$ almost everywhere), i.e.
+Given i.i.d samples $X_1, \ldots , X _ n\sim \mathbf{P} _ {\theta ^\*}$ and an associated statistical model $\left(E,\\{ \mathbf{P} _\theta \\} _ {\theta \in \Theta }\right)$, the maximum likelihood estimator $\hat{\theta } _ n^{\text {MLE}}$ of $\theta^\*$ is a **consistent** estimator under mild regularity conditions (e.g. continuity in $\theta$ of the pdf $p_\theta$ almost everywhere), i.e.
 
 $$\hat\theta _ n^{\text {MLE}}\xrightarrow [n\to \infty ]{\mathbf P} \theta ^*$$
 
@@ -290,9 +290,9 @@ Let $\theta^* \in \Theta$ (the true parameter). Assume the following:
 
 Then, $\hat\theta _ n ^{\textsf {MLE}}$ satisfies:
 
-- $\hat\theta _ n ^{\textsf {MLE}}\xrightarrow [n\to \infty]{\mathbf P}\theta^*$, w.r.t. $\mathbf P_ {\theta ^*}$;
+- $\hat\theta _ n ^{\textsf {MLE}}\xrightarrow [n\to \infty]{\mathbf P}\theta^\*$, w.r.t. $\mathbf P_ {\theta ^\*}$;
 
-- $\sqrt n (\hat\theta _ n ^{\textsf {MLE}}-\theta ^*)\xrightarrow [n\to \infty]{(d)}\mathcal{N} _d (0,\mathcal I(\theta ^*)^{-1})$, w.r.t. $\mathbf P_ {\theta ^*}$.
+- $\sqrt n (\hat\theta _ n ^{\textsf {MLE}}-\theta ^*)\xrightarrow [n\to \infty]{(d)}\mathcal{N} _d (0,\mathcal I(\theta ^\*)^{-1})$, w.r.t. $\mathbf P_ {\theta ^\*}$.
 
 **The Fisher information $\mathcal{I}(\theta)$ at the true parameter determines the asymptotic variance of the random variable $\hat\theta _ n ^{\textsf {MLE}}$.**
 
@@ -388,7 +388,7 @@ Let $X_1, \ldots , X _ n$ be i.i.d. with some unknown distribution $\mathbf{P}$ 
 An **M-estimator** of the parameter $\mu ^*$ is the **argmin of an estimator of a function** $\mathcal{Q}(\mu )$ **of the parameter** which satisfies the following:
 
 - $\mathcal{Q}(\mu )=\mathbb E\left[\rho (X,\mu ) \right]$ for some function $\rho :E\times \mathcal{M}\to \mathbb {R}$, where $\mathcal M$ is the set of all possible values of the unknown true parameter $\mu ^*$;
-- $\mathcal{Q}(\mu )$ attains a **unique** minimum at $\mu = \mu ^*$, in $\mathcal M$. That is, $\textsf {argmin} _ {\mu \in \mathcal{M}}\mathcal{Q}(\mu ) \, =\, \mu ^*$.
+- $\mathcal{Q}(\mu )$ attains a **unique** minimum at $\mu = \mu ^\*$, in $\mathcal M$. That is, $\textsf {argmin} _ {\mu \in \mathcal{M}}\mathcal{Q}(\mu ) \, =\, \mu ^\*$.
 
 In general, the goal is to find the **loss function** $\rho$ such $\mathcal{Q}(\mu )=\mathbb E\left[\rho (X,\mu ) \right]$ has the properties stated above.
 
@@ -467,7 +467,7 @@ $$
 \end{aligned}
 $$
 
-If we set $\mathcal{Q}'(\mu )=0$, we can get $\alpha=\int _ {-\infty }^{\mu^*} f(x) \, dx$, by definition $\mu^*$ is the $\alpha$-quantile of $X$.
+If we set $\mathcal{Q}'(\mu )=0$, we can get $\alpha=\int _ {-\infty }^{\mu^\*} f(x) \, dx$, by definition $\mu^\*$ is the $\alpha$-quantile of $X$.
 
 ### Asymptotic Normality of M-estimators
 
