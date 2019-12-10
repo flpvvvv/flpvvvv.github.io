@@ -17,7 +17,7 @@ Two methods are presented to measure the distance between distributions: **Total
 
 ### Total variation (TV) distance
 
-Let $\left(E, ( \mathbf P_\theta ) _ {\theta \in \Theta }\right)$ be a statistical model, and $\theta^*$ is the true parameter, the statistician's goal is that given $X_1,X_2,\ldots ,X_ n$, find an estimator $\hat\theta=\hat\theta(X_1,X_2,\ldots ,X_ n)$ such that $\mathbf P _ {\hat\theta}$ is close to $\mathbf P _ {\theta^*}$. This means: $\vert\mathbf P _ {\hat\theta} -\mathbf P _ {\theta^*}\vert$ is small for all $A \subset E$. Here $A$ is a sub sample space.
+Let $\left(E, ( \mathbf P_\theta ) _ {\theta \in \Theta }\right)$ be a statistical model, and $\theta^*$ is the true parameter, the statistician's goal is that given $X_1,X_2,\ldots ,X_ n$, find an estimator $\hat\theta=\hat\theta(X_1,X_2,\ldots ,X_ n)$ such that $\mathbf P _ {\hat\theta}$ is close to $\mathbf P _ {\theta^\*}$. This means: $\vert\mathbf P _ {\hat\theta} -\mathbf P _ {\theta^\*}\vert$ is small for all $A \subset E$. Here $A$ is a sub sample space.
 
 The **total variation distance** between two probability measures $\mathbf P _ \theta$ and $\mathbf P _ {\theta '}$with sample space E is defined by:
 
