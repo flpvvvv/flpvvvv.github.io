@@ -46,4 +46,4 @@ what you want to show | What you should enter
 more than 1 * in the paragraphe | `\*`
 $\Leftrightarrow$ | `\Leftrightarrow` (not `\Harr`)
 $\arg\max$ | `\arg\max` (not `\argmax`)
-`{{` | `{ {` (add a space between them)
+2 `{` together | `{ {` (add a space between them)
