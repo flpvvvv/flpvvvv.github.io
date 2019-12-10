@@ -43,3 +43,6 @@ what you want to show | What you should enter
 `_(` *(underscore)* | `\_(` or add a space between `_` and `(` 
 `}_` *(underscore)* | `}\_` or add a space between `}` and `_` 
 `_{` *(underscore)* | `\_{` or add a space between `_` and `{` 
+more than 1 * in the paragraphe | `\*`
+$\Leftrightarrow$ | `\Leftrightarrow` (not `\Harr`)
+$\arg\max$ | `\arg\max` (not `\argmax`)
