@@ -164,7 +164,7 @@ and if we set the above equation to 0, we can get: $\hat\lambda _ n ^{\text {MLE
 
 ### Consistency of MLE
 
-Given i.i.d samples $X_1, \ldots , X _ n\sim \mathbf{P} _ {\theta ^\*}$ and an associated statistical model $\left(E,\\{ \mathbf{P} _\theta \\} _ {\theta \in \Theta }\right)$, the maximum likelihood estimator $\hat{\theta } _ n^{\text {MLE}}$ of $\theta^\*$ is a **consistent** estimator under mild regularity conditions (e.g. continuity in $\theta$ of the pdf $p_\theta$ almost everywhere), i.e.
+Given i.i.d samples $X_1, \ldots , X _ n\sim \mathbf{P} _ {\theta ^\*}$ and an associated statistical model $\left(E,\\{ \mathbf{P} \_\theta \\} _ {\theta \in \Theta }\right)$, the maximum likelihood estimator $\hat{\theta } _ n^{\text {MLE}}$ of $\theta^\*$ is a **consistent** estimator under mild regularity conditions (e.g. continuity in $\theta$ of the pdf $p\_ \theta$ almost everywhere), i.e.
 
 $$\hat\theta _ n^{\text {MLE}}\xrightarrow [n\to \infty ]{\mathbf P} \theta ^*$$
 
@@ -292,7 +292,7 @@ Then, $\hat\theta _ n ^{\textsf {MLE}}$ satisfies:
 
 - $\hat\theta _ n ^{\textsf {MLE}}\xrightarrow [n\to \infty]{\mathbf P}\theta^\*$, w.r.t. $\mathbf P_ {\theta ^\*}$;
 
-- $\sqrt n (\hat\theta _ n ^{\textsf {MLE}}-\theta ^*)\xrightarrow [n\to \infty]{(d)}\mathcal{N} _d (0,\mathcal I(\theta ^\*)^{-1})$, w.r.t. $\mathbf P_ {\theta ^\*}$.
+- $\sqrt n (\hat\theta _ n ^{\textsf {MLE}}-\theta ^*)\xrightarrow [n\to \infty]{(d)}\mathcal{N} \_d (0,\mathcal I(\theta ^\*)^{-1})$, w.r.t. $\mathbf P\_ {\theta ^\*}$.
 
 **The Fisher information $\mathcal{I}(\theta)$ at the true parameter determines the asymptotic variance of the random variable $\hat\theta _ n ^{\textsf {MLE}}$.**
 
