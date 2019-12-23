@@ -262,7 +262,7 @@ Assume that  $\ell$ is a.s. twice differentiable. Under some regularity conditio
 
 $$\mathcal{I}(\theta ) = \textsf{Cov}(\nabla \ell (\theta )) = -\mathbb E\left[\mathbf{H}\ell (\theta )\right]$$
 
-If $\Theta \subset \mathbb R^d$, we get:
+If $\Theta \subset \mathbb R$, we get:
 
 $$\mathcal{I}(\theta ) = \textsf{Var}[\ell '(\theta )]=-\mathbb E[(\ell ''(\theta)]$$
 
