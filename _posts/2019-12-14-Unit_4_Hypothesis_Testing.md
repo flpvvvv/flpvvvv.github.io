@@ -63,7 +63,7 @@ satisfies:
 - $\bar X_ n$ is independent of $S_n$
 - $\frac{n S_ n}{\sigma ^2} \sim \chi _ {n -1}^2$
 
-Here it is $\chi _ {n -1}^2$ because there is only $(n-1)$ degree of freedom: the sum of all the variables $(X_ i - \bar X_ n)$ equal to $0$: $\sum _{i = 1}^ n (X_ i - \bar X_ n)=0$ .
+Here it is $\chi _ {n -1}^2$ because there is only $(n-1)$ degree of freedom: the sum of all the variables $(X_ i - \bar X_ n)$ equal to $0$: $\sum _ {i = 1}^ n (X_ i - \bar X_ n)=0$ .
 
 We often prefer the **unbiased estimator** of $\sigma^2$:
 
@@ -292,7 +292,7 @@ $$\mathbf{p}\cdot \mathbf{1}\, =\, \mathbf{p}^ T \mathbf{1} = 1,  \quad p_ i \ge
 
 where $\mathbf 1$ denotes the vector $\, \mathbf{1}=\begin{pmatrix} 1& 1& \ldots & 1\end{pmatrix}^ T$. Equivalently, in more familiar notation,
 
-$$\Delta _ K\, =\, \left\\{ \mathbf{p}=(p_1,\ldots ,p_ K) \in [0,1]^ K \, :\, \sum _{i=1}^{K} p_ i \, =\, 1\right\\}$$
+$$\Delta _ K\, =\, \left\{ \mathbf{p}=(p_1,\ldots ,p_ K) \in [0,1]^ K \, :\, \sum _ {i=1}^{K} p_ i \, =\, 1\right\}$$
 
 We want to test:
 
@@ -335,7 +335,7 @@ The **empirical cdf** (a.k.a. sample cdf) of the sample $X_1,\ldots,X_n$ is defi
 $$
 \begin{aligned}
 F_n(t)&=\frac{1}{n} \sum _{i = 1}^ n \mathbf{1}(X_ i \leq t) \\
-&=\frac {\#\\{i=1,\ldots,n:X_i\leq t\\}}{n}, \quad \forall t \in \mathbb R
+&=\frac {\#\{i=1,\ldots,n:X_i\leq t\}}{n}, \quad \forall t \in \mathbb R
 \end{aligned}
 $$
 
@@ -384,7 +384,7 @@ Even though the K-S test statistics $T_n$ is defined as a supremum over the enti
 $$
 \begin{aligned}
 T_n&=\sqrt{n}\sup _{t \in \mathbb {R}} \vert F_ n(t) - F^0(t) \vert \\
-&=\sqrt{n}\max _{i=1,\ldots ,n}\left\\{ \max \left(\left\vert \frac{i-1}{n}-F^0(X_{(i)}) \right\vert,\left\vert \frac{i}{n}-F^0(X_{(i)}) \right\vert \right) \right\\}
+&=\sqrt{n}\max _{i=1,\ldots ,n}\left\{ \max \left(\left\vert \frac{i-1}{n}-F^0(X_{(i)}) \right\vert,\left\vert \frac{i}{n}-F^0(X_{(i)}) \right\vert \right) \right\}
 \end{aligned}
 $$
 
@@ -416,8 +416,8 @@ Looking at a histogram, you suspect that $X_1, \ldots , X_ n$ have a Gaussian di
 
 $$
 \begin{aligned}
-H_0'&: \mathbf P \in \\{ \mathcal{N}(\mu , \sigma ^2) \\} _{\mu \in \mathbb {R}, \sigma ^2 > 0} \\
-H_1'&: \mathbf P \notin \\{ \mathcal{N}(\mu , \sigma ^2) \\} _{\mu \in \mathbb {R}, \sigma ^2 > 0}
+H_0'&: \mathbf P \in \{ \mathcal{N}(\mu , \sigma ^2) \} _{\mu \in \mathbb {R}, \sigma ^2 > 0} \\
+H_1'&: \mathbf P \notin \{ \mathcal{N}(\mu , \sigma ^2) \} _{\mu \in \mathbb {R}, \sigma ^2 > 0}
 \end{aligned}
 $$
 
