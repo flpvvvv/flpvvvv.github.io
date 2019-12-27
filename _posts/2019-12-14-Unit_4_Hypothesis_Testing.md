@@ -248,7 +248,7 @@ for some fixed and given numbers $\theta ^{(0)}_{r+1}, \ldots , \theta _ d^{(0)}
 
 Thus $\Theta_0$, the region defined by the null hypothesis, is
 
-$$\Theta _0 := \\{  \mathbf{v} \in \mathbb {R}^ d: (v_{r+1}, \ldots , v_{d}) = (\theta ^{(0)}_{r+1}, \ldots , \theta _ d^{(0)}) \\}$$
+$$\Theta _0 := \{  \mathbf{v} \in \mathbb {R}^ d: (v_{r+1}, \ldots , v_{d}) = (\theta ^{(0)}_{r+1}, \ldots , \theta _ d^{(0)}) \}$$
 
 where $(\theta ^{(0)}_{r+1}, \ldots , \theta _ d^{(0)})$ consists of *known* values.
 
