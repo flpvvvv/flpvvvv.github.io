@@ -16,7 +16,7 @@ An alternative of the frequentist approach is the **Bayesian approach**. In a se
 The frequentist approach:
 
 - Assume a statistical model $(E, \\{\mathbf P_\theta\\} _ {\theta \in \Theta})$.
-- We assumed that the data $X_1,\ldots,X_n$ was drawn i.i.d from $\mathbf P_ {\theta^*}$ for some **unknown fixed** $\theta^*$.
+- We assumed that the data $X_1,\ldots,X_n$ was drawn i.i.d from $\mathbf P_ {\theta^\*}$ for some **unknown fixed** $\theta^\*$.
 - When we used the MLE for example, we looked at all possible $\theta \in \Theta$.
 - Before seeing the data we did not prefer a choice of $\theta \in \Theta$ over another.
 
