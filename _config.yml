@@ -46,7 +46,7 @@ footer-links:
 #   youtube: # channel/<your_long_string> or user/<user-name>
 
 # 站点页脚的文字
-footer-text: Copyright (c) 2020 flpvvvv
+footer-text: Copyright (c) 2021 flpvvvv
 
 # 评论，注意，请不要同时添加多种不同的评论区
 
@@ -64,7 +64,7 @@ footer-text: Copyright (c) 2020 flpvvvv
 google_analytics: UA-37800264-2
 
 # 输入你的网站域名（如果你没有添加自己的域名，而是直接用GitHub pages分配的域名的话可以省略）
-url: tianyun.tech
+url: flpvvvv.com
 
 # 添加你的博客的二级域名，一般来说是你的repository名
 # 如果你的博客的URL是：(http://yourusername.github.io/repository-name)
