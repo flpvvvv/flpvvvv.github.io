@@ -26,7 +26,7 @@ If we know the truth, then we can use "Probability" to predict/explain the "Obse
 
 > statistics is **reverse engineering** probability. 
 
-We have some observations (most of time we can them data), but we have no idea about the truth. We use the observations to estimate the truth. This is the purpose of statistics. From data, we try to recover what the truth is like.
+We have some observations (most of time we call them data), but we have no idea about the truth. We use the observations to estimate the truth. This is the purpose of statistics. From data, we try to recover what the truth is like.
 
 ## Some conceptions
 ### i.i.d. 
