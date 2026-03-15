@@ -96,3 +96,24 @@ $dd-position: $dt-width+$dt-dd-space;
     @content;
   }
 }
+
+// Dark mode support
+@mixin dark-mode {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+// Dark mode colors
+$dark-background-color: $oc-gray-9;
+$dark-base-color: $oc-gray-1;
+$dark-base-lighten-color: $oc-gray-4;
+$dark-text-color: $oc-gray-2;
+$dark-link-color: $oc-teal-4;
+$dark-link-lighten-color: $oc-teal-3;
+$dark-link-bghv-color: $oc-teal-9;
+$dark-divider-color: $oc-gray-7;
+$dark-footer-background-color: $oc-gray-9;
+$dark-footer-border-color: $oc-gray-7;
+$dark-tag-index-label-background-color: $oc-gray-8;
+$dark-selection-background-color: $oc-teal-9;
