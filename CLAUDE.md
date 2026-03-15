@@ -4,50 +4,70 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Jekyll static site/blog deployed on GitHub Pages at https://flpvvvv.com. Based on the LOFFER template.
+This is an Astro static site/blog deployed on GitHub Pages at https://flpvvvv.com. A modern, elegant bio site for a data scientist with heavy mathematical content.
 
 ## Development Commands
 
 ```bash
 # Install dependencies
-bundle install
+pnpm install
 
-# Run local development server (default: http://localhost:4000)
-bundle exec jekyll serve
+# Run local development server (default: http://localhost:4321)
+pnpm dev
 
-# Build the site to _site/
-bundle exec jekyll build
+# Build the site to dist/
+pnpm build
+
+# Preview production build
+pnpm preview
 ```
 
 ## Architecture
 
 ### Content Structure
-- `_posts/` - Blog posts as Markdown files with naming convention `YYYY-MM-DD-title.md`
-- `_layouts/` - HTML templates: `default.html` (base), `post.html` (articles), `page.html` (static pages)
-- `_includes/` - Reusable partials: `head.html`, `nav.html`, `footer.html`, `toc.html`, etc.
-- `_sass/` - SCSS partials imported by `style.scss`
+- `src/content/posts/` - Blog posts as Markdown files with frontmatter
+- `src/layouts/` - HTML templates: `BaseLayout.astro`, `PostLayout.astro`, `PageLayout.astro`
+- `src/pages/` - Route pages: `index.astro`, `about.astro`, `posts/`, `tags/`
+- `src/styles/` - Global CSS with Tailwind
 
 ### Post Front Matter
 ```yaml
 ---
-layout: post
 title: Post Title
+description: Optional description for SEO
 date: YYYY-MM-DD
-Author: flpvvvv
+author: flpvvvv
 tags: [tag1, tag2]
-comments: false     # Enable Disqus/Gitalk
-toc: true           # Show table of contents
-pinned: false       # Pin to top of listing
+toc: true        # Show table of contents (default: true)
+draft: false     # Exclude from build if true
 ---
 ```
 
-### Key Configuration (`_config.yml`)
-- Navigation defined in `navigation` array
-- Pagination: 8 posts per page
-- Excerpt separator: `<!-- more -->`
-- MathJax enabled for LaTeX rendering (inline with `$...$`, block with `$$...$$`)
+### Key Configuration
+
+**astro.config.mjs**
+- Site URL for sitemap generation
+- Markdown plugins: remark-math, rehype-katex for LaTeX rendering
+- Shiki for syntax highlighting
+
+**tailwind.config.mjs**
+- Custom color palette (teal primary, warm neutral grays)
+- Typography plugin for prose styling
+- Dark mode via class strategy
 
 ### Styling
-- Theme color controlled in `_sass/_variables.scss` via open-color palette (currently `teal`)
-- Mobile breakpoint: 1200px
-- TOC appears as fixed sidebar on wide screens when `toc: true`
+- Theme color: Teal (`primary-*`)
+- Fonts: Crimson Pro (serif body), Inter (sans UI), JetBrains Mono (code)
+- Dark/light mode toggle in header
+- Reading progress bar at top of page
+
+### Math Rendering
+- Inline math: `$...$`
+- Block math: `$$...$$`
+- Uses KaTeX (fast, no JavaScript runtime required)
+
+### Deployment
+- GitHub Actions workflow: `.github/workflows/deploy.yml`
+- Uses pnpm for package management
+- Builds to `dist/` and deploys to `gh-pages` branch
+- Custom domain configured via CNAME file

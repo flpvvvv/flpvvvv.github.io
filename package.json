@@ -1,0 +1,25 @@
+{
+  "name": "flpvvvv-blog",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "flpvvvv's personal blog - data scientist exploring statistics and machine learning",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.4.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^22.13.5",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  const allTags = [...new Set(posts.flatMap(post => post.data.tags))];
+
+  return allTags.map(tag => ({
+    params: { tag: tag.toLowerCase() },
+    props: {
+      tag,
+      posts: posts
+        .filter(post => !post.data.draft && post.data.tags.includes(tag))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+
+interface Props {
+  tag: string;
+  posts: Awaited<ReturnType<typeof getCollection<'posts'>>>;
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={`#${tag}`} description={`Posts tagged with ${tag}`}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-12">
+      <a href="/tags" class="inline-flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 mb-4 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        All tags
+      </a>
+      <h1 class="font-sans text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+        <span class="text-primary-600 dark:text-primary-400">#</span>{tag}
+      </h1>
+      <p class="text-neutral-600 dark:text-neutral-400 mt-2">
+        {posts.length} post{posts.length !== 1 ? 's' : ''} tagged with {tag}
+      </p>
+    </header>
+
+    <div class="space-y-6">
+      {posts.map(post => {
+        const formattedDate = post.data.date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+        const words = post.body?.split(/\s+/).length || 0;
+        const readingTime = Math.max(1, Math.ceil(words / 200));
+
+        return (
+          <a href={`/posts/${post.slug}`} class="group block p-6 card">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+              <h2 class="font-sans text-lg font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                {post.data.title}
+              </h2>
+              <time datetime={post.data.date.toISOString()} class="text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
+                {formattedDate}
+              </time>
+            </div>
+            {post.data.description && (
+              <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
+                {post.data.description}
+              </p>
+            )}
+            <div class="flex items-center gap-4 text-xs text-neutral-500 dark:text-neutral-400">
+              <span>{readingTime} min read</span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

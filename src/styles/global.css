@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-serif text-neutral-700 bg-neutral-50 dark:text-neutral-300 dark:bg-neutral-900;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  ::selection {
+    @apply bg-primary-200 dark:bg-primary-800 text-neutral-900 dark:text-neutral-100;
+  }
+
+  /* Make KaTeX math display correctly */
+  .katex-display {
+    @apply my-6 overflow-x-auto;
+  }
+
+  .katex {
+    font-size: 1.1em;
+  }
+
+  /* Reading progress bar styles */
+  #reading-progress {
+    @apply fixed top-0 left-0 h-1 bg-primary-500 z-50 transition-all duration-100;
+  }
+}
+
+@layer components {
+  /* Terminal-style accent for code aesthetic */
+  .terminal-accent {
+    @apply font-mono text-primary-600 dark:text-primary-400;
+  }
+
+  /* Elegant card style */
+  .card {
+    @apply bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  /* Smooth link transitions */
+  .link-hover {
+    @apply text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200;
+  }
+
+  /* Tag pill style */
+  .tag {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-mono bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200;
+  }
+
+  /* Table of contents styles */
+  .toc-link {
+    @apply block py-1 text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 border-l-2 border-transparent hover:border-primary-500 pl-4 transition-colors duration-200;
+  }
+
+  .toc-link.active {
+    @apply text-primary-600 dark:text-primary-400 border-primary-500 font-medium;
+  }
+
+  /* Code block styles */
+  pre {
+    @apply rounded-lg overflow-x-auto;
+  }
+
+  code:not(pre code) {
+    @apply bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded text-primary-700 dark:text-primary-300 text-sm;
+  }
+}
+
+@layer utilities {
+  /* Fade in animation */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Subtle underline animation */
+  .underline-animate {
+    position: relative;
+  }
+
+  .underline-animate::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300;
+  }
+
+  .underline-animate:hover::after {
+    @apply w-full;
+  }
+}

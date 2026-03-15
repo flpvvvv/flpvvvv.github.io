@@ -1,0 +1,35 @@
+---
+import { getCollection, type InferEntrySchema } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  const sortedPosts = posts
+    .filter(post => !post.data.draft)
+    .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+
+  return sortedPosts.map((post, index) => {
+    // Find previous and next posts (reversed because we want newer posts first)
+    const prevPost = index > 0 ? sortedPosts[index - 1] : undefined;
+    const nextPost = index < sortedPosts.length - 1 ? sortedPosts[index + 1] : undefined;
+
+    return {
+      params: { slug: post.slug },
+      props: { post, prevPost, nextPost },
+    };
+  });
+}
+
+interface Props {
+  post: InferEntrySchema<'posts'> & { slug: string; body: string };
+  prevPost?: InferEntrySchema<'posts'> & { slug: string };
+  nextPost?: InferEntrySchema<'posts'> & { slug: string };
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+const { Content } = await post.render();
+---
+
+<PostLayout post={post} prevPost={prevPost} nextPost={nextPost}>
+  <Content />
+</PostLayout>
