@@ -10,8 +10,8 @@ const { title, description } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <article class="prose prose-neutral dark:prose-invert max-w-none">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <article class="prose prose-neutral dark:prose-invert max-w-[72ch]">
       <slot />
     </article>
   </div>
