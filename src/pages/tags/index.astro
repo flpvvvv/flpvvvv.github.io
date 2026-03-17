@@ -1,47 +1,51 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getTagCounts, sortPublishedPosts } from '../../lib/posts';
 
-const posts = (await getCollection('posts'))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-// Get all unique tags with count
-const tagCounts = posts.reduce((acc, post) => {
-  post.data.tags.forEach(tag => {
-    acc[tag] = (acc[tag] || 0) + 1;
-  });
-  return acc;
-}, {} as Record<string, number>);
-
+const posts = sortPublishedPosts(await getCollection('posts'));
+const tagCounts = getTagCounts(posts);
 const tags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
 ---
 
 <BaseLayout title="Tags" description="Browse posts by topic">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-    <header class="mb-16">
-      <p class="font-mono text-sm text-primary-600 dark:text-primary-400 mb-4 tracking-widest uppercase">
-        Explore
-      </p>
-      <h1 class="text-display font-bold text-neutral-900 dark:text-neutral-100 tracking-tight mb-4">
-        Tags
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <header class="mb-14 max-w-3xl">
+      <p class="section-kicker">Topics</p>
+      <h1 class="mt-5 font-display text-display text-neutral-950 dark:text-neutral-50">
+        A subject index for the archive
       </h1>
-      <p class="text-lg text-neutral-600 dark:text-neutral-400">
-        Browse posts by topic
+      <p class="mt-6 font-serif text-[1.28rem] leading-relaxed text-neutral-700 dark:text-neutral-300">
+        Browse the notebook by topic instead of chronology. Each tag groups entries around a recurring idea, method, or problem.
       </p>
     </header>
 
-    <div class="card p-8 sm:p-10">
-      <div class="flex flex-wrap gap-3">
-        {tags.map(([tag, count]) => (
-          <a href={`/tags/${tag.toLowerCase()}`} class="group inline-flex items-center gap-2 px-4 py-2 rounded-full border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:border-primary-400 dark:hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-950/30 transition-all duration-200">
-            <span class="font-mono text-sm">#{tag}</span>
-            <span class="text-xs text-neutral-400 dark:text-neutral-500 group-hover:text-primary-400 dark:group-hover:text-primary-500 font-medium">
-              {count}
-            </span>
-          </a>
-        ))}
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div class="paper-panel p-8 sm:p-10">
+        <div class="flex flex-wrap gap-3">
+          {tags.map(([tag, count]) => (
+            <a href={`/tags/${tag.toLowerCase()}`} class="tag-chip">
+              <span>#{tag}</span>
+              <span class="text-neutral-500 dark:text-neutral-400">{count}</span>
+            </a>
+          ))}
+        </div>
       </div>
+
+      <aside class="space-y-6">
+        <div class="paper-panel p-6">
+          <p class="note-panel-title">Index</p>
+          <p class="mt-4 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+            {tags.length} topic{tags.length !== 1 ? 's' : ''} across {posts.length} published entries.
+          </p>
+        </div>
+        <div class="paper-panel p-6">
+          <p class="note-panel-title">Reading Strategy</p>
+          <p class="mt-4 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+            Use tags to follow a concept across posts, then move into the chronological archive when you want the full sequence of study.
+          </p>
+        </div>
+      </aside>
     </div>
-  </div>
+  </section>
 </BaseLayout>

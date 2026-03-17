@@ -10,48 +10,46 @@
     text-rendering: optimizeLegibility;
   }
 
+  :root {
+    color-scheme: light;
+    --page-edge: theme('colors.neutral.200 / 80%');
+    --panel-border: theme('colors.neutral.300 / 72%');
+    --panel-bg: linear-gradient(
+      180deg,
+      theme('colors.neutral.50 / 88%') 0%,
+      theme('colors.white / 76%') 100%
+    );
+    --panel-shadow: 0 24px 60px -32px theme('colors.neutral.700 / 20%');
+  }
+
+  .dark {
+    color-scheme: dark;
+    --page-edge: theme('colors.neutral.800 / 90%');
+    --panel-border: theme('colors.neutral.700 / 68%');
+    --panel-bg: linear-gradient(
+      180deg,
+      theme('colors.neutral.900 / 84%') 0%,
+      theme('colors.neutral.950 / 78%') 100%
+    );
+    --panel-shadow: 0 28px 80px -42px theme('colors.black / 70%');
+  }
+
   body {
-    @apply font-sans text-neutral-700 bg-neutral-50 dark:text-neutral-300 dark:bg-neutral-950;
+    @apply font-sans text-neutral-800 bg-neutral-50 dark:text-neutral-200 dark:bg-neutral-950;
     font-feature-settings: 'kern' 1, 'liga' 1;
     position: relative;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at top left, theme('colors.primary.100 / 48%') 0%, transparent 34%),
+      linear-gradient(180deg, theme('colors.neutral.50') 0%, theme('colors.neutral.100 / 50%') 100%);
   }
 
-  /* Prose overflow handling - prevent wide content from breaking layout */
-  .prose {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    max-width: 100%;
-    /* Hide overflow at container level, but allow children to scroll */
-    overflow-x: hidden;
+  .dark body {
+    background-image:
+      radial-gradient(circle at top left, theme('colors.primary.900 / 42%') 0%, transparent 34%),
+      linear-gradient(180deg, theme('colors.neutral.950') 0%, theme('colors.neutral.900') 100%);
   }
 
-  .prose li {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    max-width: 100%;
-  }
-
-  /* Paragraphs with text content should wrap normally */
-  .prose p:not(:has(.katex:only-child)) {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    max-width: 100%;
-  }
-
-  /* Handle long URLs and code */
-  .prose a,
-  .prose code:not(pre code) {
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  /* Pre blocks should scroll horizontally */
-  .prose pre {
-    max-width: 100%;
-    overflow-x: auto;
-  }
-
-  /* Subtle noise texture overlay for light mode */
   body::before {
     content: '';
     position: fixed;
@@ -61,274 +59,274 @@
     height: 100%;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.03;
+    opacity: 0.035;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   .dark body::before {
-    opacity: 0.02;
+    opacity: 0.024;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      linear-gradient(90deg, transparent 4vw, var(--page-edge) 4vw, var(--page-edge) calc(4vw + 1px), transparent calc(4vw + 1px)),
+      linear-gradient(90deg, transparent calc(96vw - 1px), var(--page-edge) calc(96vw - 1px), var(--page-edge) 96vw, transparent 96vw);
+    opacity: 0.9;
+  }
+
+  @media (max-width: 1023px) {
+    body::after {
+      display: none;
+    }
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .prose {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
+  }
+
+  .prose :where(p, li) {
+    text-wrap: pretty;
+  }
+
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    scroll-margin-top: 8rem;
+  }
+
+  .prose pre,
+  .prose table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .prose code:not(pre code),
+  .prose a {
+    overflow-wrap: anywhere;
+  }
+
+  .prose table {
+    display: block;
+  }
+
+  .prose hr {
+    border-color: theme('colors.neutral.300 / 75%');
+  }
+
+  .dark .prose hr {
+    border-color: theme('colors.neutral.700 / 85%');
   }
 
   ::selection {
-    @apply bg-primary-200/80 dark:bg-primary-800/80 text-neutral-900 dark:text-neutral-100;
+    @apply bg-primary-200/75 dark:bg-primary-800/70 text-neutral-950 dark:text-neutral-50;
   }
 
-  /* ============================================
-     KaTeX Math Display - Clean & Readable
-     ============================================ */
-
-  /* Display math (block equations) - constrained within prose container */
-  .katex-display {
-    @apply my-6 py-4;
+  mjx-container[jax='SVG'] {
+    color: inherit;
     max-width: 100%;
-    overflow-x: auto;
   }
 
-  .katex-display > .katex {
-    display: inline-block;
-    text-align: center;
-    white-space: nowrap;
+  mjx-container[jax='SVG'] > svg {
+    overflow: visible;
   }
 
-  /* Block math with subtle background */
-  .prose .katex-display {
-    @apply px-6 py-5 rounded-lg border border-neutral-200/60 dark:border-neutral-700/40;
-    background: theme('colors.neutral.50 / 50%');
-    /* Constrain to container width and allow scroll */
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
-  .dark .prose .katex-display {
-    background: theme('colors.neutral.900 / 30%');
-  }
-
-  /* Handle display math wrapped in <p> tags (rehype-katex output) */
-  /* Target paragraphs that contain ONLY math (display equations) */
-  .prose p:has(> .katex:first-child:last-child) {
-    @apply my-6 px-6 py-5 rounded-lg border border-neutral-200/60 dark:border-neutral-700/40;
-    background: theme('colors.neutral.50 / 50%');
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    text-align: center;
-    /* Create a scroll container for the math */
+  .prose mjx-container[jax='SVG'][display='true'] {
     display: block;
-  }
-
-  .prose p:has(> .katex:first-child:last-child) > .katex {
-    display: inline-block;
-    white-space: nowrap;
-  }
-
-  /* Also target paragraphs where .katex is the only significant content (handles whitespace) */
-  .prose p:has(> .katex:only-child) {
-    @apply my-6 px-6 py-5 rounded-lg border border-neutral-200/60 dark:border-neutral-700/40;
-    background: theme('colors.neutral.50 / 50%');
     max-width: 100%;
+    margin: 2.2rem 0;
+    padding: 0.4rem 0;
     overflow-x: auto;
     overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: stable both-edges;
+    scrollbar-width: thin;
+    border-top: 1px solid theme('colors.neutral.300 / 72%');
+    border-bottom: 1px solid theme('colors.neutral.300 / 72%');
     text-align: center;
+  }
+
+  .prose mjx-container[jax='SVG'][display='true'] > svg {
     display: block;
+    min-width: max-content;
+    margin: 0 auto;
+    height: auto;
   }
 
-  .prose p:has(> .katex:only-child) > .katex {
+  .dark .prose mjx-container[jax='SVG'][display='true'] {
+    border-top-color: theme('colors.neutral.700 / 82%');
+    border-bottom-color: theme('colors.neutral.700 / 82%');
+  }
+
+  .prose p > mjx-container[jax='SVG']:only-child,
+  .prose li > mjx-container[jax='SVG']:only-child {
     display: inline-block;
-    white-space: nowrap;
+    max-width: 100%;
   }
 
-  /* Dark mode backgrounds for math blocks */
-  .dark .prose p:has(> .katex:first-child:last-child),
-  .dark .prose p:has(> .katex:only-child) {
-    background: theme('colors.neutral.900 / 30%');
-  }
-
-  /* Inline math */
-  .katex {
-    font-size: 1.05em;
-  }
-
-  /* Math within prose paragraphs - match text size */
-  .prose p .katex,
-  .prose li .katex {
-    font-size: 1em;
-  }
-
-  /* Ensure math fonts render crisply */
-  .katex {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
-
-  /* Math color in light/dark mode */
-  .katex {
-    color: theme('colors.neutral.800');
-  }
-
-  .dark .katex {
-    color: theme('colors.neutral.200');
-  }
-
-  /* Accent color for math operators/symbols */
-  .dark .katex .mord,
-  .dark .katex .mbin,
-  .dark .katex .mrel {
-    color: theme('colors.neutral.100');
-  }
-
-  /* Elegant reading progress bar */
   #reading-progress {
-    @apply fixed top-0 left-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-400 z-50;
-    transition: width 0.1s ease-out;
-    box-shadow: 0 0 10px theme('colors.primary.400 / 50%');
-  }
-
-  .dark #reading-progress {
-    box-shadow: 0 0 10px theme('colors.primary.500 / 40%');
+    @apply fixed top-0 left-0 z-50 h-px;
+    width: 0%;
+    background: linear-gradient(90deg, theme('colors.accent.400'), theme('colors.primary.500'));
+    transition: width 0.12s ease-out;
+    box-shadow: 0 0 18px theme('colors.primary.400 / 42%');
   }
 }
 
 @layer components {
-  /* Refined card style with elegant hover */
-  .card {
-    @apply relative bg-white dark:bg-neutral-900/80 rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 transition-all duration-300;
-    background: linear-gradient(135deg, theme('colors.white') 0%, theme('colors.neutral.50 / 50%') 100%);
+  .paper-panel {
+    @apply relative overflow-hidden rounded-[1.5rem] border;
+    border-color: var(--panel-border);
+    background: var(--panel-bg);
+    box-shadow: var(--panel-shadow);
+    backdrop-filter: blur(18px);
   }
 
-  .dark .card {
-    background: linear-gradient(135deg, theme('colors.neutral.900 / 80%') 0%, theme('colors.neutral.950 / 50%') 100%);
+  .paper-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, theme('colors.white / 20%') 0%, transparent 28%),
+      linear-gradient(90deg, transparent, theme('colors.primary.100 / 22%'), transparent);
+    opacity: 0.85;
   }
 
-  .card:hover {
-    @apply border-neutral-300 dark:border-neutral-700;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 40px -10px theme('colors.neutral.400 / 30%');
+  .dark .paper-panel::before {
+    background:
+      linear-gradient(180deg, theme('colors.white / 4%') 0%, transparent 28%),
+      linear-gradient(90deg, transparent, theme('colors.primary.500 / 9%'), transparent);
   }
 
-  .dark .card:hover {
-    box-shadow: 0 10px 40px -10px theme('colors.neutral.950 / 50%');
+  .section-kicker {
+    @apply font-mono text-kicker uppercase text-primary-700 dark:text-primary-300;
   }
 
-  /* Refined tag pill style */
-  .tag {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-mono border border-neutral-200 dark:border-neutral-700 bg-transparent text-neutral-600 dark:text-neutral-400 transition-all duration-200;
+  .section-rule {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, theme('colors.neutral.300'), transparent);
   }
 
-  .tag:hover {
-    @apply border-primary-400 dark:border-primary-500 text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/30;
+  .dark .section-rule {
+    background: linear-gradient(90deg, transparent, theme('colors.neutral.700'), transparent);
   }
 
-  /* Elegant table of contents */
-  .toc-link {
-    @apply block py-1.5 text-sm text-neutral-500 dark:text-neutral-400 border-l-2 border-transparent pl-4 transition-all duration-200;
-  }
-
-  .toc-link:hover {
-    @apply text-neutral-700 dark:text-neutral-300 border-neutral-300 dark:border-neutral-600;
-  }
-
-  .toc-link.active {
-    @apply text-primary-600 dark:text-primary-400 border-primary-500 font-medium;
-  }
-
-  /* Refined code styling */
-  pre {
-    @apply rounded-xl overflow-x-auto border border-neutral-200 dark:border-neutral-800;
-    box-shadow: 0 4px 20px -5px theme('colors.neutral.300 / 40%');
-  }
-
-  .dark pre {
-    box-shadow: 0 4px 20px -5px theme('colors.neutral.950 / 60%');
-  }
-
-  code:not(pre code) {
-    @apply bg-primary-50 dark:bg-primary-950/30 px-1.5 py-0.5 rounded text-primary-700 dark:text-primary-300 text-[0.9em] font-mono;
-  }
-
-  /* Hero animation wrapper */
-  .hero-animate {
-    opacity: 0;
-    animation: fadeUp 0.8s ease-out forwards;
-  }
-
-  .hero-animate:nth-child(1) { animation-delay: 0.1s; }
-  .hero-animate:nth-child(2) { animation-delay: 0.2s; }
-  .hero-animate:nth-child(3) { animation-delay: 0.35s; }
-  .hero-animate:nth-child(4) { animation-delay: 0.5s; }
-
-  /* Elegant underline animation for nav links */
   .nav-link {
-    @apply relative;
+    @apply relative inline-flex items-center pb-1 text-[0.77rem] font-medium uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400;
   }
 
   .nav-link::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-[2px] bg-primary-500 transition-all duration-300;
+    @apply absolute left-0 right-0 -bottom-0.5 h-px origin-left scale-x-0 transition-transform duration-300;
+    background: linear-gradient(90deg, theme('colors.accent.400'), theme('colors.primary.500'));
   }
 
-  .nav-link:hover::after {
-    @apply w-full;
+  .nav-link:hover,
+  .nav-link[aria-current='page'] {
+    @apply text-neutral-900 dark:text-neutral-100;
   }
 
-  /* Button styles */
-  .btn-primary {
-    @apply inline-flex items-center px-6 py-3 text-sm font-medium rounded-xl text-white bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 transition-all duration-200;
+  .nav-link:hover::after,
+  .nav-link[aria-current='page']::after {
+    @apply scale-x-100;
   }
 
-  .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px -3px theme('colors.primary.600 / 50%');
+  .theme-toggle {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300/80 bg-white/60 text-neutral-600 transition-all duration-200 hover:-translate-y-0.5 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-neutral-900/70 dark:text-neutral-300 dark:hover:text-neutral-50;
+    box-shadow: 0 12px 26px -20px theme('colors.neutral.800 / 35%');
   }
 
-  .dark .btn-primary:hover {
-    box-shadow: 0 4px 15px -3px theme('colors.primary.400 / 40%');
+  .button-solid {
+    @apply inline-flex items-center gap-3 rounded-full border border-primary-700 bg-primary-700 px-6 py-3 text-sm font-medium text-neutral-50 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-600 dark:border-primary-400 dark:bg-primary-400 dark:text-neutral-950 dark:hover:bg-primary-300;
+    box-shadow: 0 16px 38px -24px theme('colors.primary.700 / 55%');
   }
 
-  .btn-secondary {
-    @apply inline-flex items-center px-6 py-3 border border-neutral-300 dark:border-neutral-600 text-sm font-medium rounded-xl text-neutral-700 dark:text-neutral-300 bg-white/80 dark:bg-neutral-900/80 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all duration-200;
+  .button-ghost {
+    @apply inline-flex items-center gap-3 rounded-full border border-neutral-300/80 bg-white/55 px-6 py-3 text-sm font-medium text-neutral-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-neutral-500 hover:text-neutral-950 dark:border-neutral-700/85 dark:bg-neutral-900/65 dark:text-neutral-200 dark:hover:border-neutral-500 dark:hover:text-neutral-50;
   }
 
-  .btn-secondary:hover {
-    @apply border-neutral-400 dark:border-neutral-500;
-    transform: translateY(-1px);
+  .tag,
+  .tag-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50/70 px-3.5 py-1.5 font-mono text-[0.74rem] uppercase tracking-[0.15em] text-primary-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary-400 hover:bg-primary-100/80 dark:border-primary-800 dark:bg-primary-950/45 dark:text-primary-200 dark:hover:border-primary-600 dark:hover:bg-primary-900/50;
   }
 
-  /* Rined blockquote for prose */
-  .prose blockquote {
-    @apply relative pl-6 border-l-0;
+  .note-panel {
+    @apply paper-panel p-6;
   }
 
-  .prose blockquote::before {
-    content: '';
-    @apply absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary-400 to-primary-600 rounded-full;
+  .note-panel-title {
+    @apply font-mono text-[0.7rem] font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400;
   }
 
-  /* Dramatic section divider */
-  .section-divider {
-    @apply relative h-px bg-neutral-200 dark:bg-neutral-800 my-16;
+  .toc-link {
+    @apply block border-l border-transparent py-2.5 pl-4 text-sm leading-relaxed text-neutral-500 transition-colors duration-200 hover:border-primary-400 hover:text-neutral-900 dark:text-neutral-400 dark:hover:border-primary-400 dark:hover:text-neutral-100;
   }
 
-  .section-divider::before {
-    content: '';
-    @apply absolute left-1/2 -translate-x-1/2 -top-1 w-2 h-2 rounded-full bg-primary-500;
+  .toc-link.active {
+    @apply border-primary-500 text-neutral-950 dark:text-neutral-50;
+  }
+
+  .archive-row {
+    @apply grid gap-4 border-b border-neutral-200/90 py-6 transition-colors duration-200 last:border-b-0 dark:border-neutral-800/90 md:grid-cols-[8rem_minmax(0,1fr)_auto];
+  }
+
+  .archive-row:hover {
+    @apply text-neutral-950 dark:text-neutral-50;
+  }
+
+  .archive-row time,
+  .archive-meta {
+    @apply font-mono text-[0.78rem] uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400;
+  }
+
+  .archive-title {
+    @apply font-display text-[1.6rem] leading-none tracking-[-0.03em] text-neutral-900 transition-colors duration-200 dark:text-neutral-100 md:text-[1.9rem];
+  }
+
+  .archive-summary {
+    @apply mt-2 max-w-2xl text-[1rem] leading-7 text-neutral-600 dark:text-neutral-300;
+  }
+
+  .portrait-frame {
+    @apply overflow-hidden rounded-[2rem] border border-neutral-300/80 bg-white/65 p-3 dark:border-neutral-700/80 dark:bg-neutral-900/65;
+    box-shadow: var(--panel-shadow);
+  }
+
+  .portrait-frame img {
+    @apply aspect-[4/5] w-full rounded-[1.4rem] object-cover;
+  }
+
+  .post-nav-card {
+    @apply paper-panel block p-6 transition-transform duration-300 hover:-translate-y-1;
   }
 }
 
 @layer utilities {
-  /* Fade up animation */
   .animate-fade-up {
     opacity: 0;
-    animation: fadeUp 0.6s ease-out forwards;
+    animation: fadeUp 0.8s cubic-bezier(0.2, 1, 0.32, 1) forwards;
   }
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(18px);
     }
     to {
       opacity: 1;
@@ -336,28 +334,9 @@
     }
   }
 
-  /* Staggered animation delays */
   .delay-100 { animation-delay: 0.1s; }
   .delay-200 { animation-delay: 0.2s; }
   .delay-300 { animation-delay: 0.3s; }
   .delay-400 { animation-delay: 0.4s; }
   .delay-500 { animation-delay: 0.5s; }
-
-  /* Elegant text gradient */
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400;
-  }
-
-  .dark .text-gradient {
-    @apply bg-gradient-to-r from-primary-400 to-primary-300;
-  }
-
-  /* Subtle background gradient for sections */
-  .bg-subtle-gradient {
-    background: linear-gradient(180deg, theme('colors.neutral.50') 0%, theme('colors.white') 100%);
-  }
-
-  .dark .bg-subtle-gradient {
-    background: linear-gradient(180deg, theme('colors.neutral.950') 0%, theme('colors.neutral.900') 100%);
-  }
 }

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an Astro static site/blog deployed on GitHub Pages at https://flpvvvv.com. A modern, elegant bio site for a data scientist with heavy mathematical content.
+This is an Astro static site/blog deployed on GitHub Pages at https://flpvvvv.com. It is a modern editorial bio site and research notebook for a data scientist, with heavy mathematical and statistical content.
 
 ## Development Commands
 
@@ -28,7 +28,9 @@ pnpm preview
 - `src/content/posts/` - Blog posts as Markdown files with frontmatter
 - `src/layouts/` - HTML templates: `BaseLayout.astro`, `PostLayout.astro`, `PageLayout.astro`
 - `src/pages/` - Route pages: `index.astro`, `about.astro`, `posts/`, `tags/`
+- `src/lib/posts.ts` - Shared post helpers for reading time, date formatting, grouping, and tag counts
 - `src/styles/` - Global CSS with Tailwind
+- `public/images/` - Site assets such as portrait, favicon, and social preview images
 
 ### Post Front Matter
 ```yaml
@@ -47,24 +49,29 @@ draft: false     # Exclude from build if true
 
 **astro.config.mjs**
 - Site URL for sitemap generation
-- Markdown plugins: remark-math, rehype-katex for LaTeX rendering
+- Markdown plugins: `remark-math` + `rehype-mathjax/svg` for compile-time MathJax rendering
+- MathJax SVG font cache is configured globally to keep heavy math pages smaller
 - Shiki for syntax highlighting
 
 **tailwind.config.mjs**
-- Custom color palette (teal primary, warm neutral grays)
+- Editorial palette with verdigris primary, terracotta accent, and warm paper neutrals
 - Typography plugin for prose styling
+- Custom font system: `Fraunces`, `Source Serif 4`, `IBM Plex Sans`, `IBM Plex Mono`
 - Dark mode via class strategy
 
 ### Styling
-- Theme color: Teal (`primary-*`)
-- Fonts: Crimson Pro (serif body), Inter (sans UI), JetBrains Mono (code)
+- Theme feel: editorial scientific journal, not a generic tech blog
+- Fonts: `Fraunces` (display), `Source Serif 4` (reading), `IBM Plex Sans` (UI), `IBM Plex Mono` (meta/code)
+- Shared `paper-panel`, `tag-chip`, archive row, and note-panel styles live in `src/styles/global.css`
 - Dark/light mode toggle in header
 - Reading progress bar at top of page
 
 ### Math Rendering
 - Inline math: `$...$`
 - Block math: `$$...$$`
-- Uses KaTeX (fast, no JavaScript runtime required)
+- Uses compile-time MathJax SVG output, so equations are rendered statically with no client-side math runtime
+- Long display equations are allowed to scroll horizontally instead of being squeezed or boxed aggressively
+- Math quality is a core requirement for this project; avoid regressing back to weaker equation styling/integration without explicit reason
 
 ### Deployment
 - GitHub Actions workflow: `.github/workflows/deploy.yml`

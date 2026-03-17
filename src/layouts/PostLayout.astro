@@ -1,123 +1,121 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import { formatPostDate, getReadingTime } from '../lib/posts';
 
 interface Props {
   post: CollectionEntry<'posts'>;
   nextPost?: CollectionEntry<'posts'>;
   prevPost?: CollectionEntry<'posts'>;
+  headings?: MarkdownHeading[];
 }
 
-const { post, nextPost, prevPost } = Astro.props;
+const { post, nextPost, prevPost, headings = [] } = Astro.props;
 const { title, date, tags, description, toc = true } = post.data;
-
-// Calculate reading time (approx 200 words per minute for technical content)
-const words = post.body?.split(/\s+/).length || 0;
-const readingTime = Math.max(1, Math.ceil(words / 200));
-
-// Format date
-const formattedDate = date.toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
-
-// Generate TOC from headings
-const headings = post.body?.match(/^#{1,3}\s+.+$/gm) || [];
-const tocItems = headings
-  .filter(h => h.startsWith('##'))
-  .map(h => {
-    const level = h.match(/^#+/)?.[0].length || 2;
-    const text = h.replace(/^#+\s+/, '');
-    const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    return { level, text, id };
-  });
+const readingTime = getReadingTime(post.body);
+const formattedDate = formatPostDate(date, 'long');
+const tocItems = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-    <!-- Article Header -->
-    <header class="mb-12 sm:mb-16">
-      <p class="font-mono text-sm text-primary-600 dark:text-primary-400 mb-4 tracking-widest uppercase">
-        {formattedDate}
-      </p>
+  <article class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <header class="border-b border-neutral-200/90 pb-14 dark:border-neutral-800/90">
+      <div class="grid gap-10 xl:grid-cols-[minmax(0,1fr)_16rem] xl:items-start">
+        <div class="max-w-4xl">
+          <p class="section-kicker animate-fade-up">{formattedDate}</p>
+          <h1 class="animate-fade-up delay-100 mt-5 font-display text-display leading-[0.94] tracking-[-0.04em] text-neutral-950 dark:text-neutral-50">
+            {title}
+          </h1>
 
-      <h1 class="text-display font-bold text-neutral-900 dark:text-neutral-100 mb-6 leading-tight tracking-tight">
-        {title}
-      </h1>
+          {description && (
+            <p class="animate-fade-up delay-200 mt-6 max-w-3xl font-serif text-[1.28rem] leading-relaxed text-neutral-700 dark:text-neutral-300 sm:text-[1.4rem]">
+              {description}
+            </p>
+          )}
 
-      <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-500 dark:text-neutral-400">
-        <span class="flex items-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <span class="font-mono">{readingTime} min read</span>
-        </span>
-      </div>
-
-      {tags.length > 0 && (
-        <div class="flex flex-wrap gap-2 mt-6">
-          {tags.map((tag: string) => (
-            <a href={`/tags/${tag.toLowerCase()}`} class="tag">
-              {tag}
-            </a>
-          ))}
+          <div class="animate-fade-up delay-300 mt-8 flex flex-wrap items-center gap-3 text-sm text-neutral-600 dark:text-neutral-300">
+            <span class="tag-chip">{readingTime} min read</span>
+            <span class="tag-chip">{tags.length} topic{tags.length !== 1 ? 's' : ''}</span>
+            {tags.map((tag: string) => (
+              <a href={`/tags/${tag.toLowerCase()}`} class="tag-chip">
+                {tag}
+              </a>
+            ))}
+          </div>
         </div>
-      )}
+
+        <div class="paper-panel p-6">
+          <p class="note-panel-title">Article Notes</p>
+          <div class="mt-5 space-y-5 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+            <div>
+              <p class="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">Published</p>
+              <p class="mt-2">{formattedDate}</p>
+            </div>
+            <div>
+              <p class="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">Reading Time</p>
+              <p class="mt-2">{readingTime} minutes</p>
+            </div>
+            <div>
+              <p class="font-mono text-[0.68rem] uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">Format</p>
+              <p class="mt-2">Mathematical notebook entry with static MathJax rendering.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <!-- Article Content with optional TOC -->
-    <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_180px] lg:gap-10 xl:gap-12 lg:max-w-none">
-      <!-- Main Content - optimal line length (65-75 chars) for readability -->
-      <div class="prose prose-neutral dark:prose-invert" style="max-width: 72ch;">
-        <slot />
+    <div class="mt-14 grid gap-12 xl:grid-cols-[minmax(0,1fr)_16rem]">
+      <div class="min-w-0">
+        <div class="max-w-[84ch]">
+          <div class="prose prose-neutral dark:prose-invert max-w-none">
+            <slot />
+          </div>
+        </div>
+
+        <nav class="mt-18 grid gap-4 border-t border-neutral-200/90 pt-8 dark:border-neutral-800/90 md:grid-cols-2">
+          {prevPost ? (
+            <a href={`/posts/${prevPost.slug}`} class="post-nav-card">
+              <span class="note-panel-title">Previous</span>
+              <span class="mt-4 block font-display text-[1.35rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100">
+                {prevPost.data.title}
+              </span>
+            </a>
+          ) : (
+            <div></div>
+          )}
+
+          {nextPost ? (
+            <a href={`/posts/${nextPost.slug}`} class="post-nav-card text-left md:text-right">
+              <span class="note-panel-title">Next</span>
+              <span class="mt-4 block font-display text-[1.35rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100">
+                {nextPost.data.title}
+              </span>
+            </a>
+          ) : (
+            <div></div>
+          )}
+        </nav>
       </div>
 
-      <!-- Table of Contents (desktop only) -->
       {toc && tocItems.length > 0 && (
-        <aside class="hidden lg:block">
-          <nav class="sticky top-28">
-            <h2 class="font-sans text-xs font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mb-4">
-              On this page
-            </h2>
-            <ul class="space-y-0.5 border-l border-neutral-200 dark:border-neutral-800">
-              {tocItems.map((item: { level: number; text: string; id: string }) => (
-                <li>
-                  <a href={`#${item.id}`} class="toc-link">
-                    {item.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+        <aside class="hidden xl:block">
+          <div class="note-panel sticky top-32">
+            <p class="note-panel-title">On This Page</p>
+            <nav class="mt-5">
+              <ul class="space-y-1">
+                {tocItems.map((item) => (
+                  <li>
+                    <a href={`#${item.slug}`} class="toc-link" data-depth={item.depth}>
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
         </aside>
       )}
     </div>
-
-    <!-- Navigation -->
-    <nav class="mt-16 sm:mt-20 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-      <div class="grid grid-cols-2 gap-4">
-        {prevPost ? (
-          <a href={`/posts/${prevPost.slug}`} class="group p-5 sm:p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-200 hover:bg-primary-50/50 dark:hover:bg-primary-950/20">
-            <span class="block text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">Previous</span>
-            <span class="font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
-              {prevPost.data.title}
-            </span>
-          </a>
-        ) : (
-          <div></div>
-        )}
-        {nextPost ? (
-          <a href={`/posts/${nextPost.slug}`} class="group p-5 sm:p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-200 hover:bg-primary-50/50 dark:hover:bg-primary-950/20 text-right">
-            <span class="block text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">Next</span>
-            <span class="font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
-              {nextPost.data.title}
-            </span>
-          </a>
-        ) : (
-          <div></div>
-        )}
-      </div>
-    </nav>
   </article>
 </BaseLayout>

@@ -1,91 +1,76 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatPostDate, getReadingTime, groupPostsByYear, sortPublishedPosts } from '../../lib/posts';
 
-const posts = (await getCollection('posts'))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-// Group posts by year
-const postsByYear = posts.reduce((acc, post) => {
-  const year = post.data.date.getFullYear();
-  if (!acc[year]) {
-    acc[year] = [];
-  }
-  acc[year].push(post);
-  return acc;
-}, {} as Record<number, typeof posts>);
-
+const posts = sortPublishedPosts(await getCollection('posts'));
+const postsByYear = groupPostsByYear(posts);
 const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
 ---
 
 <BaseLayout title="Posts" description="All posts by flpvvvv">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-    <header class="mb-16">
-      <p class="font-mono text-sm text-primary-600 dark:text-primary-400 mb-4 tracking-widest uppercase">
-        Archive
-      </p>
-      <h1 class="text-display font-bold text-neutral-900 dark:text-neutral-100 tracking-tight mb-4">
-        Posts
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <header class="mb-14 max-w-3xl">
+      <p class="section-kicker">Archive</p>
+      <h1 class="mt-5 font-display text-display text-neutral-950 dark:text-neutral-50">
+        Every post, ordered like a bound volume
       </h1>
-      <p class="text-lg text-neutral-600 dark:text-neutral-400">
-        Notes on statistics, machine learning, and data science
+      <p class="mt-6 font-serif text-[1.28rem] leading-relaxed text-neutral-700 dark:text-neutral-300">
+        A chronological archive of the notebook: statistics, machine learning, and the surrounding methods that make quantitative reasoning useful.
       </p>
     </header>
 
-    {years.map(year => (
-      <section class="mb-16">
-        <div class="flex items-baseline gap-4 mb-8">
-          <h2 class="text-5xl font-bold text-neutral-200 dark:text-neutral-800 tracking-tight">
-            {year}
-          </h2>
-          <span class="text-sm font-mono text-neutral-400 dark:text-neutral-600">
-            {postsByYear[year].length} post{postsByYear[year].length !== 1 ? 's' : ''}
-          </span>
+    <div class="grid gap-12 xl:grid-cols-[14rem_minmax(0,1fr)]">
+      <aside class="hidden xl:block">
+        <div class="note-panel sticky top-32">
+          <p class="note-panel-title">Archive Facts</p>
+          <p class="mt-4 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+            {posts.length} entries collected across {years.length} publication year{years.length !== 1 ? 's' : ''}.
+          </p>
         </div>
+      </aside>
 
-        <div class="space-y-2">
-          {postsByYear[year].map(post => {
-            const formattedDate = post.data.date.toLocaleDateString('en-US', {
-              month: 'short',
-              day: 'numeric',
-            });
-            const words = post.body?.split(/\s+/).length || 0;
-            const readingTime = Math.max(1, Math.ceil(words / 200));
+      <div class="space-y-16">
+        {years.map((year) => (
+          <section>
+            <div class="mb-8 flex items-end gap-4">
+              <h2 class="font-display text-[4rem] leading-none tracking-[-0.05em] text-neutral-300 dark:text-neutral-700">
+                {year}
+              </h2>
+              <span class="archive-meta pb-2">
+                {postsByYear[year].length} post{postsByYear[year].length !== 1 ? 's' : ''}
+              </span>
+            </div>
 
-            return (
-              <a href={`/posts/${post.slug}`} class="group block -mx-4 px-4 py-4 rounded-xl hover:bg-neutral-100/80 dark:hover:bg-neutral-900/80 transition-colors">
-                <article class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
-                  <time datetime={post.data.date.toISOString()} class="font-mono text-sm text-neutral-400 dark:text-neutral-500 w-20 flex-shrink-0">
-                    {formattedDate}
-                  </time>
-                  <h3 class="text-lg font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors flex-grow">
-                    {post.data.title}
-                  </h3>
-                  <div class="flex items-center gap-3">
-                    <span class="text-sm font-mono text-neutral-400 dark:text-neutral-500">
-                      {readingTime} min
-                    </span>
-                    <svg class="w-4 h-4 text-neutral-300 dark:text-neutral-700 group-hover:text-primary-400 dark:group-hover:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div>
+              {postsByYear[year].map((post) => (
+                <a href={`/posts/${post.slug}`} class="archive-row">
+                  <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date, 'short')}</time>
+                  <div>
+                    <h3 class="archive-title">{post.data.title}</h3>
+                    {post.data.description && (
+                      <p class="archive-summary">{post.data.description}</p>
+                    )}
+                    {post.data.tags.length > 0 && (
+                      <div class="mt-4 flex flex-wrap gap-2">
+                        {post.data.tags.map((tag: string) => (
+                          <span class="tag-chip">#{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div class="archive-meta flex items-center gap-3 md:justify-end">
+                    <span>{getReadingTime(post.body)} min</span>
+                    <svg class="h-4 w-4 text-primary-700 dark:text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                   </div>
-                </article>
-
-                {post.data.tags.length > 0 && (
-                  <div class="flex gap-2 mt-2 sm:ml-26 pl-20">
-                    {post.data.tags.map((tag: string) => (
-                      <span class="text-xs font-mono text-primary-600/60 dark:text-primary-400/60">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </a>
-            );
-          })}
-        </div>
-      </section>
-    ))}
-  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
