@@ -18,7 +18,7 @@ Note: a site to calculate/look up statistic curves/values: [link](https://keisan
 ## Probability and Statistics
 Very explicit explanation of the relation of **probability** and **statistics**:
 
-![probability and statistics](https://raw.githubusercontent.com/flpvvvv/flpvvvv.github.io/master/images/probability%20and%20statistics.png)
+![probability and statistics](/images/probability%20and%20statistics.png)
 
 If we know the truth, then we can use "Probability" to predict/explain the "Observations". However,
 
