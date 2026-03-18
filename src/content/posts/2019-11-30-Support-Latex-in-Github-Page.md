@@ -1,6 +1,6 @@
 ---
-title: Support Latex in Github Page to show math equations
-description: How to fix common LaTeX rendering issues in GitHub Pages with MathJax
+title: Support LaTeX in GitHub Pages for Math Equations
+description: How to fix common LaTeX rendering issues in GitHub Pages with MathJax, including inline math escaping for pipes, braces, and underscores
 date: 2019-11-30
 author: flpvvvv
 tags: [Github Page, Bug]

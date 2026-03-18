@@ -73,7 +73,7 @@ For example, KL divergence between 2 **Gaussian** distributions $\mathbf P=\math
 
 $$\text {KL}(\mathbf{P}, \mathbf{Q})=\frac 12(a-b)^2$$
 
-Explanation can be found [here](https://github.com/erochassa/mitx18.650/blob/master/recitation5.pdf).
+Explanation can be found in [Recitation 5 notes (PDF)](https://github.com/erochassa/mitx18.650/blob/master/recitation5.pdf).
 
 ## Maximum likelihood estimation
 

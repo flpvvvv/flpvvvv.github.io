@@ -8,7 +8,7 @@ const postsByYear = groupPostsByYear(posts);
 const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
 ---
 
-<BaseLayout title="Posts" description="All posts by flpvvvv">
+<BaseLayout title="Archive — All Notebook Entries" description="Browse every entry in the notebook: long-form notes on statistics, probability, estimation, hypothesis testing, and Bayesian methods.">
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
     <header class="mb-14 max-w-3xl">
       <p class="section-kicker">Archive</p>
@@ -44,7 +44,7 @@ const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
 
             <div>
               {postsByYear[year].map((post) => (
-                <a href={`/posts/${post.slug}`} class="archive-row">
+                <a href={`/posts/${post.slug}/`} class="archive-row">
                   <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date, 'short')}</time>
                   <div>
                     <h3 class="archive-title">{post.data.title}</h3>

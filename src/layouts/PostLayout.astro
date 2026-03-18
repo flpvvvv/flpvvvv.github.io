@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from 'astro';
-import { formatPostDate, getReadingTime } from '../lib/posts';
+import { formatPostDate, getReadingTime, slugifyTag } from '../lib/posts';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { post, nextPost, prevPost, headings = [] } = Astro.props;
-const { title, date, tags, description, toc = true } = post.data;
+const { title, date, tags, description, author, toc = true } = post.data;
 const readingTime = getReadingTime(post.body);
 const formattedDate = formatPostDate(date, 'long');
 const tocItems = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
@@ -35,10 +35,10 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
           )}
 
           <div class="animate-fade-up delay-300 mt-8 flex flex-wrap items-center gap-3 text-sm text-neutral-600 dark:text-neutral-300">
+            {author && <span class="tag-chip">By {author}</span>}
             <span class="tag-chip">{readingTime} min read</span>
-            <span class="tag-chip">{tags.length} topic{tags.length !== 1 ? 's' : ''}</span>
             {tags.map((tag: string) => (
-              <a href={`/tags/${tag.toLowerCase()}`} class="tag-chip">
+              <a href={`/tags/${slugifyTag(tag)}/`} class="tag-chip">
                 {tag}
               </a>
             ))}
@@ -75,7 +75,7 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
 
         <nav class="mt-18 grid gap-4 border-t border-neutral-200/90 pt-8 dark:border-neutral-800/90 md:grid-cols-2">
           {prevPost ? (
-            <a href={`/posts/${prevPost.slug}`} class="post-nav-card">
+            <a href={`/posts/${prevPost.slug}/`} class="post-nav-card">
               <span class="note-panel-title">Previous</span>
               <span class="mt-4 block font-display text-[1.35rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100">
                 {prevPost.data.title}
@@ -86,7 +86,7 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
           )}
 
           {nextPost ? (
-            <a href={`/posts/${nextPost.slug}`} class="post-nav-card text-left md:text-right">
+            <a href={`/posts/${nextPost.slug}/`} class="post-nav-card text-left md:text-right">
               <span class="note-panel-title">Next</span>
               <span class="mt-4 block font-display text-[1.35rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100">
                 {nextPost.data.title}

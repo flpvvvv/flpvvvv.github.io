@@ -1,14 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatPostDate, getReadingTime } from '../../lib/posts';
+import { formatPostDate, getReadingTime, slugifyTag } from '../../lib/posts';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
   const allTags = [...new Set(posts.flatMap(post => post.data.tags))];
 
   return allTags.map(tag => ({
-    params: { tag: tag.toLowerCase() },
+    params: { tag: slugifyTag(tag) },
     props: {
       tag,
       posts: posts
@@ -26,10 +26,10 @@ interface Props {
 const { tag, posts } = Astro.props;
 ---
 
-<BaseLayout title={`#${tag}`} description={`Posts tagged with ${tag}`}>
+<BaseLayout title={`Posts Tagged ${tag} — Notebook Entries`} description={`Browse all notebook entries tagged with ${tag}. Long-form notes on mathematical methods, proofs, and statistical intuition.`}>
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
     <header class="mb-14 max-w-3xl">
-      <a href="/tags" class="section-kicker inline-flex items-center gap-2 hover:text-primary-900 dark:hover:text-primary-200">
+      <a href="/tags/" class="section-kicker inline-flex items-center gap-2 hover:text-primary-900 dark:hover:text-primary-200">
         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
         </svg>
@@ -46,7 +46,7 @@ const { tag, posts } = Astro.props;
     <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
       <div>
         {posts.map((post) => (
-          <a href={`/posts/${post.slug}`} class="archive-row">
+          <a href={`/posts/${post.slug}/`} class="archive-row">
             <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date, 'short')}</time>
             <div>
               <h2 class="archive-title">{post.data.title}</h2>

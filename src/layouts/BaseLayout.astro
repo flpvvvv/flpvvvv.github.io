@@ -9,16 +9,16 @@ interface Props {
 
 const {
   title,
-  description = 'flpvvvv is a data scientist publishing field notes on statistics, inference, and machine learning.',
+  description = 'flpvvvv is a data scientist publishing long-form field notes on statistics, inference, probability, and machine learning methods.',
   image = '/images/social.jpg',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pathname = Astro.url.pathname;
 const navItems = [
-  { href: '/posts', label: 'Archive' },
-  { href: '/tags', label: 'Topics' },
-  { href: '/about', label: 'About' },
+  { href: '/posts/', label: 'Archive' },
+  { href: '/tags/', label: 'Topics' },
+  { href: '/about/', label: 'About' },
 ];
 ---
 
@@ -60,9 +60,6 @@ const navItems = [
     <!-- Theme color -->
     <meta name="theme-color" content="#2f6963" />
 
-    <!-- RSS Feed -->
-    <link rel="alternate" type="application/rss+xml" title="flpvvvv" href="/rss.xml" />
-
     <script is:inline>
       const storedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
       const systemTheme =
@@ -75,6 +72,7 @@ const navItems = [
     </script>
   </head>
   <body class="min-h-screen flex flex-col">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:top-2 focus:left-2 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-primary-700 focus:shadow-lg dark:focus:bg-neutral-900 dark:focus:text-primary-300">Skip to content</a>
     <div id="reading-progress" style="width: 0%"></div>
 
     <header class="sticky top-0 z-40 border-b border-neutral-200/80 bg-neutral-50/88 backdrop-blur-xl dark:border-neutral-800/85 dark:bg-neutral-950/84">
@@ -125,7 +123,7 @@ const navItems = [
       </nav>
     </header>
 
-    <main class="flex-1 relative z-10">
+    <main id="main-content" class="flex-1 relative z-10">
       <slot />
     </main>
 
@@ -142,10 +140,9 @@ const navItems = [
         </div>
 
         <div class="grid gap-2 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
-          <a href="/posts" class="hover:text-neutral-950 dark:hover:text-neutral-50">Archive</a>
-          <a href="/tags" class="hover:text-neutral-950 dark:hover:text-neutral-50">Topics</a>
-          <a href="/about" class="hover:text-neutral-950 dark:hover:text-neutral-50">About</a>
-          <a href="/rss.xml" class="hover:text-neutral-950 dark:hover:text-neutral-50">RSS</a>
+          <a href="/posts/" class="hover:text-neutral-950 dark:hover:text-neutral-50">Archive</a>
+          <a href="/tags/" class="hover:text-neutral-950 dark:hover:text-neutral-50">Topics</a>
+          <a href="/about/" class="hover:text-neutral-950 dark:hover:text-neutral-50">About</a>
         </div>
 
         <div class="flex flex-col items-start gap-4 lg:items-end">
@@ -155,11 +152,13 @@ const navItems = [
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
               </svg>
+              <span class="sr-only">Email</span>
             </a>
             <a href="https://github.com/flpvvvv" target="_blank" rel="noopener noreferrer" class="text-neutral-500 hover:text-primary-700 dark:text-neutral-400 dark:hover:text-primary-300" aria-label="GitHub">
               <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
               </svg>
+              <span class="sr-only">GitHub</span>
             </a>
           </div>
 

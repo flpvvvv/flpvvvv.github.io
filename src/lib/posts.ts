@@ -43,6 +43,10 @@ export function groupPostsByYear(posts: PostEntry[]) {
   }, {} as Record<number, PostEntry[]>);
 }
 
+export function slugifyTag(tag: string) {
+  return tag.toLowerCase().replace(/\s+/g, '-');
+}
+
 export function getTagCounts(posts: PostEntry[]) {
   return posts.reduce((acc, post) => {
     post.data.tags.forEach((tag) => {

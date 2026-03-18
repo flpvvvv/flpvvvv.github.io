@@ -1,6 +1,6 @@
 ---
 title: Unit 4 - Hypothesis testing
-description: Notes on T-tests, Wald's test, likelihood ratio tests, and goodness of fit tests from MITx Fundamentals of Statistics
+description: Notes on T-tests, Wald's test, likelihood ratio tests, and goodness of fit tests from MITx 18.6501x Fundamentals of Statistics
 date: 2019-12-14
 author: flpvvvv
 tags: [Statistics]

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { formatPostDate, getReadingTime, getTagCounts, sortPublishedPosts } from '../lib/posts';
+import { formatPostDate, getReadingTime, getTagCounts, slugifyTag, sortPublishedPosts } from '../lib/posts';
 
 const posts = sortPublishedPosts(await getCollection('posts'));
 const [featuredPost, ...recentPosts] = posts;
@@ -11,7 +11,7 @@ const yearRange = posts.length
   : null;
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title="Field Notes on Statistics & Inference">
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
     <div class="grid gap-10 xl:grid-cols-[minmax(0,1.15fr)_21rem] xl:items-start">
       <div>
@@ -24,13 +24,13 @@ const yearRange = posts.length
         </p>
 
         <div class="animate-fade-up delay-300 mt-8 flex flex-wrap gap-3">
-          <a href="/posts" class="button-solid">
+          <a href="/posts/" class="button-solid">
             Read the archive
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </a>
-          <a href="/about" class="button-ghost">About the author</a>
+          <a href="/about/" class="button-ghost">About the author</a>
         </div>
 
         <div class="animate-fade-up delay-400 mt-10 grid gap-4 md:grid-cols-3">
@@ -68,7 +68,7 @@ const yearRange = posts.length
 
       <div class="grid gap-4">
         <div class="portrait-frame animate-fade-up delay-200">
-          <img src="/images/profile.png" alt="Portrait of flpvvvv" loading="eager" />
+          <img src="/images/profile.jpg" alt="Portrait of flpvvvv" width="400" height="400" loading="eager" />
         </div>
 
         <div class="paper-panel animate-fade-up delay-300 p-6">
@@ -94,13 +94,13 @@ const yearRange = posts.length
             Recent entries from the archive
           </h2>
         </div>
-        <a href="/posts" class="hidden font-mono text-[0.72rem] uppercase tracking-[0.18em] text-primary-700 hover:text-primary-900 dark:text-primary-300 dark:hover:text-primary-200 md:block">
+        <a href="/posts/" class="hidden font-mono text-[0.72rem] uppercase tracking-[0.18em] text-primary-700 hover:text-primary-900 dark:text-primary-300 dark:hover:text-primary-200 md:block">
           Browse all posts
         </a>
       </div>
 
       {featuredPost && (
-        <a href={`/posts/${featuredPost.slug}`} class="paper-panel mt-8 block p-8 transition-transform duration-300 hover:-translate-y-1">
+        <a href={`/posts/${featuredPost.slug}/`} class="paper-panel mt-8 block p-8 transition-transform duration-300 hover:-translate-y-1">
           <p class="section-kicker">{formatPostDate(featuredPost.data.date, 'medium')}</p>
           <h3 class="mt-5 font-display text-[2.55rem] leading-[0.95] tracking-[-0.04em] text-neutral-950 dark:text-neutral-50">
             {featuredPost.data.title}
@@ -121,7 +121,7 @@ const yearRange = posts.length
 
       <div class="mt-8">
         {recentPosts.slice(0, 4).map((post) => (
-          <a href={`/posts/${post.slug}`} class="archive-row">
+          <a href={`/posts/${post.slug}/`} class="archive-row">
             <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date, 'short')}</time>
             <div>
               <h3 class="archive-title">{post.data.title}</h3>
@@ -145,7 +145,7 @@ const yearRange = posts.length
         <p class="note-panel-title">Topic Index</p>
         <div class="mt-5 flex flex-wrap gap-2.5">
           {tagCounts.map(([tag, count]) => (
-            <a href={`/tags/${tag.toLowerCase()}`} class="tag-chip">
+            <a href={`/tags/${slugifyTag(tag)}/`} class="tag-chip">
               {tag}
               <span class="text-neutral-500 dark:text-neutral-400">{count}</span>
             </a>

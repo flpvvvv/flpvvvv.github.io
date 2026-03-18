@@ -7,6 +7,7 @@ import rehypeMathjax from 'rehype-mathjax/svg';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://flpvvvv.com',
+  trailingSlash: 'always',
   integrations: [
     tailwind(),
     sitemap(),

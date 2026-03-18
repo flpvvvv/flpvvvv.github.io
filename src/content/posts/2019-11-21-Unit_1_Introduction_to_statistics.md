@@ -9,16 +9,14 @@ toc: true
 
 This is my notes of the course **"MITx: 18.6501x Fundamentals of Statistics"** on edX. The session that I participated started on **Sept 2, 2019**. The purpose of this document is to help me remember what I have learnt.
 
-Here is the [link](https://courses.edx.org/courses/course-v1:MITx+18.6501x+3T2019/course/) of the course.
+Here is the [MITx 18.6501x course page](https://courses.edx.org/courses/course-v1:MITx+18.6501x+3T2019/course/).
 
-Note: a site to calculate/look up statistic curves/values: [link](https://keisan.casio.com/)
-
-# Unit 1: Introduction to Statistics
+Note: a site to calculate/look up statistic curves/values: [Keisan Online Calculator](https://keisan.casio.com/)
 
 ## Probability and Statistics
 Very explicit explanation of the relation of **probability** and **statistics**:
 
-![probability and statistics](/images/probability%20and%20statistics.png)
+![Diagram showing the relationship between probability and statistics](/images/probability%20and%20statistics.png)
 
 If we know the truth, then we can use "Probability" to predict/explain the "Observations". However,
 
