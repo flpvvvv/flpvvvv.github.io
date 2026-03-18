@@ -50,7 +50,7 @@ draft: false     # Exclude from build if true
 **astro.config.mjs**
 - Site URL for sitemap generation
 - Markdown plugins: `remark-math` + `rehype-mathjax/svg` for compile-time MathJax rendering
-- MathJax SVG font cache is configured globally to keep heavy math pages smaller
+- MathJax SVG font cache uses `'local'` mode (each SVG self-contained); `'global'` breaks under Astro's slot-based rendering
 - Shiki for syntax highlighting
 
 **tailwind.config.mjs**

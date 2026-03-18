@@ -18,7 +18,7 @@ export default defineConfig({
         tags: 'none',
       },
       svg: {
-        fontCache: 'global',
+        fontCache: 'local',
       },
     }]],
     shikiConfig: {
