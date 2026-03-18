@@ -3,20 +3,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Page Not Found">
-  <section class="mx-auto flex max-w-6xl flex-col items-center justify-center px-4 py-24 text-center sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+  <section class="mx-auto flex max-w-6xl flex-col items-center justify-center px-4 py-16 text-center sm:px-6 sm:py-32 lg:px-8 lg:py-40">
     <p class="section-kicker">Error 404</p>
 
-    <h1 class="mt-6 font-display text-display text-neutral-950 dark:text-neutral-50">
+    <h1 class="mt-4 font-display text-display text-neutral-950 dark:text-neutral-50 sm:mt-6">
       Page not found
     </h1>
 
-    <p class="mt-6 max-w-lg text-lg leading-8 text-neutral-600 dark:text-neutral-300">
+    <p class="mt-4 max-w-lg text-base leading-8 text-neutral-600 dark:text-neutral-300 sm:mt-6 sm:text-lg">
       The page you are looking for does not exist, or it may have been moved during a recent reorganisation of these notes.
     </p>
 
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10 sm:gap-4">
       <a href="/" class="button-solid">Back to home</a>
-      <a href="/posts" class="button-ghost">Browse the archive</a>
+      <a href="/posts/" class="button-ghost">Browse the archive</a>
     </div>
   </section>
 </BaseLayout>

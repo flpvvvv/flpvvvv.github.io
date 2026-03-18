@@ -19,22 +19,22 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-    <header class="border-b border-neutral-200/90 pb-14 dark:border-neutral-800/90">
-      <div class="grid gap-10 xl:grid-cols-[minmax(0,1fr)_16rem] xl:items-start">
+  <article class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <header class="border-b border-neutral-200/90 pb-10 dark:border-neutral-800/90 sm:pb-14">
+      <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_16rem] xl:items-start xl:gap-10">
         <div class="max-w-4xl">
           <p class="section-kicker animate-fade-up">{formattedDate}</p>
-          <h1 class="animate-fade-up delay-100 mt-5 font-display text-display leading-[0.94] tracking-[-0.04em] text-neutral-950 dark:text-neutral-50">
+          <h1 class="animate-fade-up delay-100 mt-4 font-display text-display leading-[0.94] tracking-[-0.04em] text-neutral-950 dark:text-neutral-50 sm:mt-5">
             {title}
           </h1>
 
           {description && (
-            <p class="animate-fade-up delay-200 mt-6 max-w-3xl font-serif text-[1.28rem] leading-relaxed text-neutral-700 dark:text-neutral-300 sm:text-[1.4rem]">
+            <p class="animate-fade-up delay-200 mt-5 max-w-3xl font-serif text-[1.15rem] leading-relaxed text-neutral-700 dark:text-neutral-300 sm:mt-6 sm:text-[1.4rem]">
               {description}
             </p>
           )}
 
-          <div class="animate-fade-up delay-300 mt-8 flex flex-wrap items-center gap-3 text-sm text-neutral-600 dark:text-neutral-300">
+          <div class="animate-fade-up delay-300 mt-6 flex flex-wrap items-center gap-2.5 text-sm text-neutral-600 dark:text-neutral-300 sm:mt-8 sm:gap-3">
             {author && <span class="tag-chip">By {author}</span>}
             <span class="tag-chip">{readingTime} min read</span>
             {tags.map((tag: string) => (
@@ -45,7 +45,7 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
           </div>
         </div>
 
-        <div class="paper-panel p-6">
+        <div class="hidden paper-panel p-6 xl:block">
           <p class="note-panel-title">Article Notes</p>
           <div class="mt-5 space-y-5 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
             <div>
@@ -65,7 +65,7 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
       </div>
     </header>
 
-    <div class="mt-14 grid gap-12 xl:grid-cols-[minmax(0,1fr)_16rem]">
+    <div class="mt-10 grid gap-12 sm:mt-14 xl:grid-cols-[minmax(0,1fr)_16rem]">
       <div class="min-w-0">
         <div class="max-w-[84ch]">
           <div class="prose prose-neutral dark:prose-invert max-w-none">
@@ -77,7 +77,7 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
           {prevPost ? (
             <a href={`/posts/${prevPost.slug}/`} class="post-nav-card">
               <span class="note-panel-title">Previous</span>
-              <span class="mt-4 block font-display text-[1.35rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100">
+              <span class="mt-4 block font-display text-[1.2rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100 sm:text-[1.35rem]">
                 {prevPost.data.title}
               </span>
             </a>
@@ -88,7 +88,7 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
           {nextPost ? (
             <a href={`/posts/${nextPost.slug}/`} class="post-nav-card text-left md:text-right">
               <span class="note-panel-title">Next</span>
-              <span class="mt-4 block font-display text-[1.35rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100">
+              <span class="mt-4 block font-display text-[1.2rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100 sm:text-[1.35rem]">
                 {nextPost.data.title}
               </span>
             </a>
@@ -100,13 +100,18 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
 
       {toc && tocItems.length > 0 && (
         <aside class="hidden xl:block">
-          <div class="note-panel sticky top-32">
+          <div class="note-panel sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto overscroll-contain" id="toc-desktop">
             <p class="note-panel-title">On This Page</p>
-            <nav class="mt-5">
-              <ul class="space-y-1">
+            <nav class="mt-5" aria-label="Table of contents">
+              <ul class="space-y-0.5">
                 {tocItems.map((item) => (
                   <li>
-                    <a href={`#${item.slug}`} class="toc-link" data-depth={item.depth}>
+                    <a
+                      href={`#${item.slug}`}
+                      class:list={['toc-link', { 'toc-link--nested': item.depth === 3 }]}
+                      data-toc-link
+                      data-heading-id={item.slug}
+                    >
                       {item.text}
                     </a>
                   </li>
@@ -118,4 +123,172 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
       )}
     </div>
   </article>
+
+  {/* Mobile TOC floating button + drawer */}
+  {toc && tocItems.length > 0 && (
+    <div class="xl:hidden">
+      <button
+        id="mobile-toc-toggle"
+        class="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300/80 bg-white/90 text-neutral-700 shadow-lg backdrop-blur-md transition-all duration-200 hover:shadow-xl active:scale-95 dark:border-neutral-700/80 dark:bg-neutral-900/90 dark:text-neutral-200"
+        aria-label="Toggle table of contents"
+        aria-expanded="false"
+        aria-controls="mobile-toc-drawer"
+      >
+        <svg class="h-5 w-5" id="mobile-toc-icon-open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h10M4 18h14"></path>
+        </svg>
+        <svg class="hidden h-5 w-5" id="mobile-toc-icon-close" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div
+        id="mobile-toc-backdrop"
+        class="fixed inset-0 z-30 hidden bg-black/40 backdrop-blur-sm"
+        aria-hidden="true"
+      ></div>
+
+      <div
+        id="mobile-toc-drawer"
+        class="fixed bottom-0 left-0 right-0 z-40 translate-y-full rounded-t-2xl border-t border-neutral-200/90 bg-neutral-50/98 p-6 pb-10 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-out dark:border-neutral-700/90 dark:bg-neutral-950/98"
+        role="dialog"
+        aria-label="Table of contents"
+      >
+        <div class="mx-auto max-w-lg">
+          <div class="mb-4 flex items-center justify-between">
+            <p class="note-panel-title">On This Page</p>
+            <button id="mobile-toc-close" class="flex h-8 w-8 items-center justify-center rounded-full text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100" aria-label="Close table of contents">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          <nav aria-label="Table of contents" class="max-h-[60vh] overflow-y-auto overscroll-contain">
+            <ul class="space-y-0.5">
+              {tocItems.map((item) => (
+                <li>
+                  <a
+                    href={`#${item.slug}`}
+                    class:list={['toc-link', { 'toc-link--nested': item.depth === 3 }]}
+                    data-toc-link-mobile
+                    data-heading-id={item.slug}
+                  >
+                    {item.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  )}
+
+  {/* Back to top button */}
+  <button
+    id="back-to-top"
+    class="fixed bottom-6 left-6 z-40 flex h-10 w-10 translate-y-4 items-center justify-center rounded-full border border-neutral-300/80 bg-white/90 text-neutral-500 opacity-0 shadow-md backdrop-blur-md transition-all duration-300 hover:text-neutral-900 hover:shadow-lg active:scale-95 dark:border-neutral-700/80 dark:bg-neutral-900/90 dark:text-neutral-400 dark:hover:text-neutral-100 xl:bottom-8 xl:left-8"
+    aria-label="Back to top"
+  >
+    <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+    </svg>
+  </button>
+
+  <script is:inline>
+  (function() {
+    const allTocLinks = document.querySelectorAll('[data-toc-link], [data-toc-link-mobile]');
+    const headingIds = [...new Set([...allTocLinks].map(l => l.dataset.headingId))];
+    const headings = headingIds.map(id => document.getElementById(id)).filter(Boolean);
+
+    if (headings.length > 0) {
+      let currentId = '';
+      const setActive = (id) => {
+        if (id === currentId) return;
+        currentId = id;
+        allTocLinks.forEach(link => {
+          const isActive = link.dataset.headingId === id;
+          link.classList.toggle('active', isActive);
+        });
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter(e => e.isIntersecting);
+        if (visible.length > 0) {
+          visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          setActive(visible[0].target.id);
+        } else {
+          const above = entries
+            .filter(e => e.boundingClientRect.top < 0)
+            .sort((a, b) => b.boundingClientRect.top - a.boundingClientRect.top);
+          if (above.length > 0) setActive(above[0].target.id);
+        }
+      }, {
+        rootMargin: '-80px 0px -65% 0px',
+        threshold: [0, 1]
+      });
+
+      headings.forEach(h => observer.observe(h));
+    }
+
+    // Mobile TOC
+    const toggle = document.getElementById('mobile-toc-toggle');
+    const drawer = document.getElementById('mobile-toc-drawer');
+    const backdrop = document.getElementById('mobile-toc-backdrop');
+    const closeBtn = document.getElementById('mobile-toc-close');
+    const iconOpen = document.getElementById('mobile-toc-icon-open');
+    const iconClose = document.getElementById('mobile-toc-icon-close');
+
+    function openMobileToc() {
+      if (!drawer) return;
+      drawer.classList.remove('translate-y-full');
+      drawer.classList.add('translate-y-0');
+      backdrop?.classList.remove('hidden');
+      toggle?.setAttribute('aria-expanded', 'true');
+      iconOpen?.classList.add('hidden');
+      iconClose?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileToc() {
+      if (!drawer) return;
+      drawer.classList.add('translate-y-full');
+      drawer.classList.remove('translate-y-0');
+      backdrop?.classList.add('hidden');
+      toggle?.setAttribute('aria-expanded', 'false');
+      iconOpen?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    toggle?.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      isOpen ? closeMobileToc() : openMobileToc();
+    });
+    closeBtn?.addEventListener('click', closeMobileToc);
+    backdrop?.addEventListener('click', closeMobileToc);
+
+    document.querySelectorAll('[data-toc-link-mobile]').forEach(link => {
+      link.addEventListener('click', () => {
+        setTimeout(closeMobileToc, 100);
+      });
+    });
+
+    // Back to top
+    const backToTop = document.getElementById('back-to-top');
+    if (backToTop) {
+      const toggleBackToTop = () => {
+        const show = window.scrollY > 600;
+        backToTop.style.opacity = show ? '1' : '0';
+        backToTop.style.pointerEvents = show ? 'auto' : 'none';
+        backToTop.style.transform = show ? 'translateY(0)' : 'translateY(1rem)';
+      };
+      window.addEventListener('scroll', toggleBackToTop, { passive: true });
+      toggleBackToTop();
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  })();
+  </script>
 </BaseLayout>

@@ -27,18 +27,18 @@ const { tag, posts } = Astro.props;
 ---
 
 <BaseLayout title={`Posts Tagged ${tag} — Notebook Entries`} description={`Browse all notebook entries tagged with ${tag}. Long-form notes on mathematical methods, proofs, and statistical intuition.`}>
-  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-    <header class="mb-14 max-w-3xl">
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <header class="mb-10 max-w-3xl sm:mb-14">
       <a href="/tags/" class="section-kicker inline-flex items-center gap-2 hover:text-primary-900 dark:hover:text-primary-200">
         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
         </svg>
         Back to topics
       </a>
-      <h1 class="mt-5 font-display text-display text-neutral-950 dark:text-neutral-50">
+      <h1 class="mt-4 font-display text-display text-neutral-950 dark:text-neutral-50 sm:mt-5">
         <span class="text-primary-700 dark:text-primary-300">#</span>{tag}
       </h1>
-      <p class="mt-6 font-serif text-[1.28rem] leading-relaxed text-neutral-700 dark:text-neutral-300">
+      <p class="mt-4 font-serif text-[1.1rem] leading-relaxed text-neutral-700 dark:text-neutral-300 sm:mt-6 sm:text-[1.28rem]">
         {posts.length} post{posts.length !== 1 ? 's' : ''} tagged with {tag}
       </p>
     </header>

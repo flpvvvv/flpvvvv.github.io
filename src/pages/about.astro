@@ -3,25 +3,27 @@ import PageLayout from '../layouts/PageLayout.astro';
 ---
 
 <PageLayout title="About — Data Scientist & Statistician" description="Learn about flpvvvv, a data scientist focused on statistics, inference, and machine learning. This notebook archives rigorous mathematical writing.">
-  <header class="not-prose mb-14">
+  <header class="not-prose mb-10 sm:mb-14">
     <p class="section-kicker">About</p>
-    <h1 class="mt-5 font-display text-display text-neutral-950 dark:text-neutral-50">
+    <h1 class="mt-4 font-display text-display text-neutral-950 dark:text-neutral-50 sm:mt-5">
       The person behind the notebook
     </h1>
   </header>
 
-  <section class="not-prose mb-16 grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
-    <div class="paper-panel p-8">
-      <p class="font-serif text-[1.3rem] leading-relaxed text-neutral-800 dark:text-neutral-200">
-        I’m <span class="text-primary-700 dark:text-primary-300">flpvvvv</span>, a data scientist drawn to the part of the discipline where careful mathematics meets clear explanation. I’m interested in turning statistical ideas into something readable without flattening their rigor.
-      </p>
-      <p class="mt-5 text-base leading-8 text-neutral-700 dark:text-neutral-300">
-        This site is intentionally blog-first. Rather than presenting a portfolio of polished claims, it foregrounds the work itself: notes, derivations, definitions, examples, and the gradual sharpening of intuition.
-      </p>
+  <section class="not-prose mb-12 grid gap-8 sm:mb-16 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+    <div class="order-2 lg:order-1">
+      <div class="paper-panel p-6 sm:p-8">
+        <p class="font-serif text-[1.15rem] leading-relaxed text-neutral-800 dark:text-neutral-200 sm:text-[1.3rem]">
+          I'm <span class="text-primary-700 dark:text-primary-300">flpvvvv</span>, a data scientist drawn to the part of the discipline where careful mathematics meets clear explanation. I'm interested in turning statistical ideas into something readable without flattening their rigor.
+        </p>
+        <p class="mt-4 text-[0.95rem] leading-8 text-neutral-700 dark:text-neutral-300 sm:mt-5 sm:text-base">
+          This site is intentionally blog-first. Rather than presenting a portfolio of polished claims, it foregrounds the work itself: notes, derivations, definitions, examples, and the gradual sharpening of intuition.
+        </p>
+      </div>
     </div>
 
-    <div class="portrait-frame">
-      <img src="/images/profile.jpg" alt="Portrait of flpvvvv" width="400" height="400" />
+    <div class="portrait-frame order-1 mx-auto w-48 lg:order-2 lg:mx-0 lg:w-auto">
+      <img src="/images/profile.jpg" alt="Portrait of flpvvvv" width="400" height="400" loading="lazy" />
     </div>
   </section>
 
@@ -55,13 +57,13 @@ import PageLayout from '../layouts/PageLayout.astro';
     </p>
   </section>
 
-  <section class="not-prose mt-16">
-    <div class="paper-panel p-8">
+  <section class="not-prose mt-12 sm:mt-16">
+    <div class="paper-panel p-6 sm:p-8">
       <p class="note-panel-title">Connect</p>
-      <p class="mt-4 max-w-2xl text-base leading-8 text-neutral-700 dark:text-neutral-300">
+      <p class="mt-4 max-w-2xl text-[0.95rem] leading-8 text-neutral-700 dark:text-neutral-300 sm:text-base">
         Reach out by email or follow along elsewhere for occasional notes on data science, statistics, and the craft of explanation.
       </p>
-      <div class="mt-6 flex flex-wrap gap-3">
+      <div class="mt-5 flex flex-wrap gap-3 sm:mt-6">
         <a href="mailto:flpvvvv@live.com" class="button-ghost">
           <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
