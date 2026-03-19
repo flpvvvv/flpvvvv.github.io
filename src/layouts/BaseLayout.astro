@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -60,18 +61,25 @@ const navItems = [
     <!-- Theme color -->
     <meta name="theme-color" content="#2f6963" />
 
+    <ClientRouter />
+
     <script is:inline>
-      const storedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
-      const systemTheme =
-        typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'light';
-      const initialTheme = storedTheme || systemTheme;
-      document.documentElement.classList.remove('light', 'dark');
-      document.documentElement.classList.add(initialTheme);
+      function applyTheme() {
+        const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
+        const system =
+          typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+        const theme = stored || system;
+        document.documentElement.classList.remove('light', 'dark');
+        document.documentElement.classList.add(theme);
+      }
+      applyTheme();
+      document.addEventListener('astro:after-swap', applyTheme);
     </script>
   </head>
   <body class="min-h-screen flex flex-col">
+    <div class="dot-grid" aria-hidden="true"></div>
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:top-2 focus:left-2 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-primary-700 focus:shadow-lg dark:focus:bg-neutral-900 dark:focus:text-primary-300">Skip to content</a>
     <div id="reading-progress" style="width: 0%"></div>
 
@@ -114,7 +122,7 @@ const navItems = [
 
           {/* Mobile controls */}
           <div class="flex items-center gap-2 lg:hidden">
-            <button id="theme-toggle-mobile" class="theme-toggle !h-10 !w-10" aria-label="Toggle dark mode">
+            <button id="theme-toggle-mobile" class="theme-toggle !h-11 !w-11" aria-label="Toggle dark mode">
               <svg class="hidden h-[18px] w-[18px] dark:block" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
               </svg>
@@ -124,10 +132,10 @@ const navItems = [
             </button>
             <button
               id="mobile-nav-toggle"
-              class="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-300/80 bg-white/60 text-neutral-600 transition-colors duration-200 hover:text-neutral-900 dark:border-neutral-700/80 dark:bg-neutral-900/70 dark:text-neutral-300 dark:hover:text-neutral-50"
+              class="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300/80 bg-white/60 text-neutral-600 transition-colors duration-200 hover:text-neutral-900 active:scale-95 dark:border-neutral-700/80 dark:bg-neutral-900/70 dark:text-neutral-300 dark:hover:text-neutral-50"
               aria-label="Open menu"
               aria-expanded="false"
-              aria-controls="mobile-nav-menu"
+              aria-controls="mobile-nav-overlay"
             >
               <svg class="h-[18px] w-[18px]" id="nav-icon-open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -138,34 +146,53 @@ const navItems = [
             </button>
           </div>
         </div>
-
-        {/* Mobile navigation menu */}
-        <div id="mobile-nav-menu" class="hidden border-t border-neutral-200/80 pb-5 pt-4 dark:border-neutral-800/80 lg:!hidden">
-          <div class="flex flex-col gap-1">
-            {navItems.map((item) => {
-              const isActive =
-                item.href === '/'
-                  ? pathname === item.href
-                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
-              return (
-                <a
-                  href={item.href}
-                  class:list={[
-                    'mobile-nav-item flex items-center gap-3 rounded-xl px-4 py-3 text-[0.82rem] font-medium uppercase tracking-[0.16em] transition-colors duration-200',
-                    isActive
-                      ? 'bg-primary-50/80 text-primary-800 dark:bg-primary-950/40 dark:text-primary-200'
-                      : 'text-neutral-600 hover:bg-neutral-100/80 hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-neutral-800/50 dark:hover:text-neutral-100',
-                  ]}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  {item.label}
-                </a>
-              );
-            })}
-          </div>
-        </div>
       </nav>
     </header>
+
+    {/* Full-screen mobile navigation overlay */}
+    <div
+      id="mobile-nav-overlay"
+      class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-neutral-50/97 opacity-0 pointer-events-none backdrop-blur-2xl transition-opacity duration-300 dark:bg-neutral-950/97 lg:!hidden"
+      role="dialog"
+      aria-label="Navigation menu"
+    >
+      <button
+        id="mobile-nav-close"
+        class="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300/80 bg-white/60 text-neutral-600 transition-colors duration-200 hover:text-neutral-900 active:scale-95 dark:border-neutral-700/80 dark:bg-neutral-900/70 dark:text-neutral-300 dark:hover:text-neutral-50"
+        aria-label="Close menu"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <nav class="flex flex-col items-center gap-2">
+        {navItems.map((item) => {
+          const isActive =
+            item.href === '/'
+              ? pathname === item.href
+              : pathname === item.href || pathname.startsWith(`${item.href}/`);
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                'mobile-overlay-link translate-y-4 opacity-0 rounded-2xl px-8 py-4 text-center font-display text-[2rem] leading-tight tracking-[-0.03em] transition-all duration-300 ease-out',
+                isActive
+                  ? 'text-primary-700 dark:text-primary-300'
+                  : 'text-neutral-800 hover:text-primary-700 dark:text-neutral-200 dark:hover:text-primary-300',
+              ]}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+      </nav>
+
+      <p class="absolute bottom-8 font-mono text-[0.68rem] uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
+        flpvvvv &middot; Field Notes
+      </p>
+    </div>
 
     <main id="main-content" class="flex-1 relative z-10">
       <slot />
@@ -214,61 +241,86 @@ const navItems = [
     </footer>
 
     <script is:inline>
-      const getThemePreference = () => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      };
-
-      const setTheme = (theme) => {
-        document.documentElement.classList.remove('light', 'dark');
-        document.documentElement.classList.add(theme);
-        localStorage.setItem('theme', theme);
-      };
-
-      const toggleTheme = () => {
-        const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        setTheme(current === 'dark' ? 'light' : 'dark');
-      };
-
-      setTheme(getThemePreference());
-
-      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
-      document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
-
-      // Mobile nav
-      const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-      const mobileNavMenu = document.getElementById('mobile-nav-menu');
-      const navIconOpen = document.getElementById('nav-icon-open');
-      const navIconClose = document.getElementById('nav-icon-close');
-
-      if (mobileNavToggle && mobileNavMenu) {
-        mobileNavToggle.addEventListener('click', () => {
-          const isOpen = mobileNavToggle.getAttribute('aria-expanded') === 'true';
-          mobileNavMenu.classList.toggle('hidden', isOpen);
-          mobileNavToggle.setAttribute('aria-expanded', String(!isOpen));
-          navIconOpen?.classList.toggle('hidden', !isOpen);
-          navIconClose?.classList.toggle('hidden', isOpen);
-        });
-      }
-
-      // Reading progress
-      const progressBar = document.getElementById('reading-progress');
-      if (progressBar) {
-        let ticking = false;
-        const updateProgress = () => {
-          const scrollTop = window.scrollY;
-          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          if (docHeight <= 0) return;
-          progressBar.style.width = `${Math.min((scrollTop / docHeight) * 100, 100)}%`;
-          ticking = false;
+      function initPage() {
+        const setTheme = (theme) => {
+          document.documentElement.classList.remove('light', 'dark');
+          document.documentElement.classList.add(theme);
+          localStorage.setItem('theme', theme);
         };
-        window.addEventListener('scroll', () => {
-          if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
-        }, { passive: true });
-        updateProgress();
+
+        const toggleTheme = () => {
+          const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+          setTheme(current === 'dark' ? 'light' : 'dark');
+        };
+
+        document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+        document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+        // Mobile nav overlay
+        const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+        const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+        const navIconOpen = document.getElementById('nav-icon-open');
+        const navIconClose = document.getElementById('nav-icon-close');
+        const mobileNavClose = document.getElementById('mobile-nav-close');
+
+        function openMobileNav() {
+          if (!mobileNavOverlay) return;
+          mobileNavOverlay.classList.remove('pointer-events-none', 'opacity-0');
+          mobileNavOverlay.classList.add('pointer-events-auto', 'opacity-100');
+          mobileNavToggle?.setAttribute('aria-expanded', 'true');
+          navIconOpen?.classList.add('hidden');
+          navIconClose?.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          mobileNavOverlay.querySelectorAll('.mobile-overlay-link').forEach((link, i) => {
+            link.style.transitionDelay = `${80 + i * 50}ms`;
+            link.classList.remove('translate-y-4', 'opacity-0');
+          });
+        }
+
+        function closeMobileNav() {
+          if (!mobileNavOverlay) return;
+          mobileNavOverlay.querySelectorAll('.mobile-overlay-link').forEach((link) => {
+            link.style.transitionDelay = '0ms';
+            link.classList.add('translate-y-4', 'opacity-0');
+          });
+          setTimeout(() => {
+            mobileNavOverlay.classList.add('pointer-events-none', 'opacity-0');
+            mobileNavOverlay.classList.remove('pointer-events-auto', 'opacity-100');
+          }, 120);
+          mobileNavToggle?.setAttribute('aria-expanded', 'false');
+          navIconOpen?.classList.remove('hidden');
+          navIconClose?.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+
+        mobileNavToggle?.addEventListener('click', () => {
+          const isOpen = mobileNavToggle.getAttribute('aria-expanded') === 'true';
+          isOpen ? closeMobileNav() : openMobileNav();
+        });
+        mobileNavClose?.addEventListener('click', closeMobileNav);
+        mobileNavOverlay?.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => setTimeout(closeMobileNav, 80));
+        });
+
+        // Reading progress
+        const progressBar = document.getElementById('reading-progress');
+        if (progressBar) {
+          let ticking = false;
+          const updateProgress = () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (docHeight <= 0) { progressBar.style.width = '0%'; ticking = false; return; }
+            progressBar.style.width = `${Math.min((scrollTop / docHeight) * 100, 100)}%`;
+            ticking = false;
+          };
+          window.addEventListener('scroll', () => {
+            if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+          }, { passive: true });
+          updateProgress();
+        }
       }
+      initPage();
+      document.addEventListener('astro:after-swap', initPage);
     </script>
   </body>
 </html>
