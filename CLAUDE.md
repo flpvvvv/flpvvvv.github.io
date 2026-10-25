@@ -79,3 +79,7 @@ draft: false     # Exclude from build if true
 - Uses pnpm for package management
 - Builds to `dist/` and deploys to `gh-pages` branch
 - Custom domain configured via CNAME file
+
+### Dependency Updates
+- Dependabot alerts and security updates are enabled on the repository
+- `.github/dependabot.yml` runs npm (pnpm lockfile) version updates weekly on Sunday at 02:00 UTC
