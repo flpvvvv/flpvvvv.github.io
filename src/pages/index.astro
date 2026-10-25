@@ -107,7 +107,7 @@ const yearRange = posts.length
       </div>
 
       {featuredPost && (
-        <a href={`/posts/${featuredPost.slug}/`} class="paper-panel mt-6 block p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:mt-8 sm:p-8">
+        <a href={`/posts/${featuredPost.id}/`} class="paper-panel mt-6 block p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:mt-8 sm:p-8">
           <p class="section-kicker">{formatPostDate(featuredPost.data.date, 'medium')}</p>
           <h3 class="mt-3 font-display text-[1.8rem] leading-[0.95] tracking-[-0.04em] text-neutral-950 dark:text-neutral-50 sm:mt-5 sm:text-[2.55rem]">
             {featuredPost.data.title}
@@ -128,7 +128,7 @@ const yearRange = posts.length
 
       <div class="mt-6 sm:mt-8">
         {recentPosts.slice(0, 4).map((post) => (
-          <a href={`/posts/${post.slug}/`} class="archive-row">
+          <a href={`/posts/${post.id}/`} class="archive-row">
             <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date, 'short')}</time>
             <div>
               <h3 class="archive-title">{post.data.title}</h3>

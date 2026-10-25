@@ -1,6 +1,75 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary-50: #eef7f5;
+  --color-primary-100: #d7ebe7;
+  --color-primary-200: #b7d7d1;
+  --color-primary-300: #8fc0b8;
+  --color-primary-400: #629f97;
+  --color-primary-500: #3f7f78;
+  --color-primary-600: #2f6963;
+  --color-primary-700: #25544f;
+  --color-primary-800: #1f4541;
+  --color-primary-900: #1b3936;
+  --color-primary-950: #0f2221;
+
+  --color-accent-50: #fcf5f2;
+  --color-accent-100: #f6e3da;
+  --color-accent-200: #eec5b2;
+  --color-accent-300: #e09a79;
+  --color-accent-400: #cf6b47;
+  --color-accent-500: #bb4a2a;
+  --color-accent-600: #9e3b22;
+  --color-accent-700: #7f311d;
+  --color-accent-800: #672a1b;
+  --color-accent-900: #552416;
+  --color-accent-950: #2f120b;
+
+  --color-neutral-50: #fbf8f1;
+  --color-neutral-100: #f3eee4;
+  --color-neutral-200: #e7decf;
+  --color-neutral-300: #d7cab5;
+  --color-neutral-400: #b8a78f;
+  --color-neutral-500: #8f7d67;
+  --color-neutral-600: #6c5d4c;
+  --color-neutral-700: #4c4136;
+  --color-neutral-800: #332c26;
+  --color-neutral-900: #1d1916;
+  --color-neutral-950: #120f0d;
+
+  --font-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, Cambria, "Times New Roman", serif;
+  --font-display: "Fraunces", "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", SFMono-Regular, Menlo, Monaco, monospace;
+
+  --text-hero: clamp(4rem, 9vw, 8rem);
+  --text-hero--line-height: 0.92;
+  --text-hero--letter-spacing: -0.04em;
+  --text-hero--font-weight: 600;
+
+  --text-display: clamp(2.9rem, 6vw, 5.5rem);
+  --text-display--line-height: 0.96;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 600;
+
+  --text-heading: clamp(1.65rem, 3vw, 2.35rem);
+  --text-heading--line-height: 1.08;
+  --text-heading--letter-spacing: -0.02em;
+  --text-heading--font-weight: 600;
+
+  --text-kicker: 0.75rem;
+  --text-kicker--line-height: 1.2;
+  --text-kicker--letter-spacing: 0.28em;
+  --text-kicker--font-weight: 600;
+
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-26: 6.5rem;
+  --spacing-30: 7.5rem;
+}
 
 @layer base {
   html {
@@ -12,28 +81,28 @@
 
   :root {
     color-scheme: light;
-    --page-edge: theme('colors.neutral.200 / 80%');
-    --panel-border: theme('colors.neutral.300 / 72%');
+    --page-edge: color-mix(in srgb, var(--color-neutral-200) 80%, transparent);
+    --panel-border: color-mix(in srgb, var(--color-neutral-300) 72%, transparent);
     --panel-bg: linear-gradient(
       180deg,
-      theme('colors.neutral.50 / 88%') 0%,
-      theme('colors.white / 76%') 100%
+      color-mix(in srgb, var(--color-neutral-50) 88%, transparent) 0%,
+      color-mix(in srgb, var(--color-white) 76%, transparent) 100%
     );
-    --panel-shadow: 0 24px 60px -32px theme('colors.neutral.700 / 20%');
-    --dot-color: theme('colors.neutral.400 / 28%');
+    --panel-shadow: 0 24px 60px -32px color-mix(in srgb, var(--color-neutral-700) 20%, transparent);
+    --dot-color: color-mix(in srgb, var(--color-neutral-400) 28%, transparent);
   }
 
   .dark {
     color-scheme: dark;
-    --page-edge: theme('colors.neutral.800 / 90%');
-    --panel-border: theme('colors.neutral.700 / 68%');
+    --page-edge: color-mix(in srgb, var(--color-neutral-800) 90%, transparent);
+    --panel-border: color-mix(in srgb, var(--color-neutral-700) 68%, transparent);
     --panel-bg: linear-gradient(
       180deg,
-      theme('colors.neutral.900 / 84%') 0%,
-      theme('colors.neutral.950 / 78%') 100%
+      color-mix(in srgb, var(--color-neutral-900) 84%, transparent) 0%,
+      color-mix(in srgb, var(--color-neutral-950) 78%, transparent) 100%
     );
-    --panel-shadow: 0 28px 80px -42px theme('colors.black / 70%');
-    --dot-color: theme('colors.neutral.700 / 22%');
+    --panel-shadow: 0 28px 80px -42px color-mix(in srgb, var(--color-black) 70%, transparent);
+    --dot-color: color-mix(in srgb, var(--color-neutral-700) 22%, transparent);
   }
 
   body {
@@ -42,14 +111,14 @@
     position: relative;
     min-height: 100vh;
     background-image:
-      radial-gradient(circle at top left, theme('colors.primary.100 / 48%') 0%, transparent 34%),
-      linear-gradient(180deg, theme('colors.neutral.50') 0%, theme('colors.neutral.100 / 50%') 100%);
+      radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary-100) 48%, transparent) 0%, transparent 34%),
+      linear-gradient(180deg, var(--color-neutral-50) 0%, color-mix(in srgb, var(--color-neutral-100) 50%, transparent) 100%);
   }
 
   .dark body {
     background-image:
-      radial-gradient(circle at top left, theme('colors.primary.900 / 42%') 0%, transparent 34%),
-      linear-gradient(180deg, theme('colors.neutral.950') 0%, theme('colors.neutral.900') 100%);
+      radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary-900) 42%, transparent) 0%, transparent 34%),
+      linear-gradient(180deg, var(--color-neutral-950) 0%, var(--color-neutral-900) 100%);
   }
 
   body::before {
@@ -137,11 +206,11 @@
   }
 
   .prose hr {
-    border-color: theme('colors.neutral.300 / 75%');
+    border-color: color-mix(in srgb, var(--color-neutral-300) 75%, transparent);
   }
 
   .dark .prose hr {
-    border-color: theme('colors.neutral.700 / 85%');
+    border-color: color-mix(in srgb, var(--color-neutral-700) 85%, transparent);
   }
 
   ::selection {
@@ -221,27 +290,29 @@
   }
 
   .prose mjx-container[jax='SVG'][display='true'] {
-    border-top: 1px solid theme('colors.neutral.300 / 72%');
-    border-bottom: 1px solid theme('colors.neutral.300 / 72%');
+    border-top: 1px solid color-mix(in srgb, var(--color-neutral-300) 72%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-neutral-300) 72%, transparent);
   }
 
   .dark .prose mjx-container[jax='SVG'][display='true'] {
-    border-top-color: theme('colors.neutral.700 / 82%');
-    border-bottom-color: theme('colors.neutral.700 / 82%');
+    border-top-color: color-mix(in srgb, var(--color-neutral-700) 82%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--color-neutral-700) 82%, transparent);
   }
 
   #reading-progress {
     @apply fixed top-0 left-0 z-50;
     height: 2px;
     width: 0%;
-    background: linear-gradient(90deg, theme('colors.accent.400'), theme('colors.primary.500'));
+    background: linear-gradient(90deg, var(--color-accent-400), var(--color-primary-500));
     transition: width 0.1s ease-out;
-    box-shadow: 0 0 12px theme('colors.primary.400 / 50%');
+    box-shadow: 0 0 12px color-mix(in srgb, var(--color-primary-400) 50%, transparent);
   }
 }
 
 @layer components {
-  .paper-panel {
+  .paper-panel,
+  .note-panel,
+  .post-nav-card {
     @apply relative overflow-hidden rounded-[1.5rem] border;
     border-color: var(--panel-border);
     background: var(--panel-bg);
@@ -255,15 +326,23 @@
     inset: 0;
     pointer-events: none;
     background:
-      linear-gradient(180deg, theme('colors.white / 20%') 0%, transparent 28%),
-      linear-gradient(90deg, transparent, theme('colors.primary.100 / 22%'), transparent);
+      linear-gradient(180deg, color-mix(in srgb, var(--color-white) 20%, transparent) 0%, transparent 28%),
+      linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-primary-100) 22%, transparent), transparent);
     opacity: 0.85;
   }
 
   .dark .paper-panel::before {
     background:
-      linear-gradient(180deg, theme('colors.white / 4%') 0%, transparent 28%),
-      linear-gradient(90deg, transparent, theme('colors.primary.500 / 9%'), transparent);
+      linear-gradient(180deg, color-mix(in srgb, var(--color-white) 4%, transparent) 0%, transparent 28%),
+      linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-primary-500) 9%, transparent), transparent);
+  }
+
+  .note-panel {
+    @apply p-6;
+  }
+
+  .post-nav-card {
+    @apply block p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg active:scale-[0.98] sm:p-6;
   }
 
   .section-kicker {
@@ -272,11 +351,11 @@
 
   .section-rule {
     @apply h-px w-full;
-    background: linear-gradient(90deg, transparent, theme('colors.neutral.300'), transparent);
+    background: linear-gradient(90deg, transparent, var(--color-neutral-300), transparent);
   }
 
   .dark .section-rule {
-    background: linear-gradient(90deg, transparent, theme('colors.neutral.700'), transparent);
+    background: linear-gradient(90deg, transparent, var(--color-neutral-700), transparent);
   }
 
   .nav-link {
@@ -287,7 +366,7 @@
   .nav-link::after {
     content: '';
     @apply absolute left-0 right-0 -bottom-0.5 h-px origin-left scale-x-0 transition-transform duration-300;
-    background: linear-gradient(90deg, theme('colors.accent.400'), theme('colors.primary.500'));
+    background: linear-gradient(90deg, var(--color-accent-400), var(--color-primary-500));
   }
 
   .nav-link:hover,
@@ -302,12 +381,12 @@
 
   .theme-toggle {
     @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300/80 bg-white/60 text-neutral-600 transition-all duration-200 hover:-translate-y-0.5 hover:text-neutral-900 active:scale-95 dark:border-neutral-700/80 dark:bg-neutral-900/70 dark:text-neutral-300 dark:hover:text-neutral-50;
-    box-shadow: 0 12px 26px -20px theme('colors.neutral.800 / 35%');
+    box-shadow: 0 12px 26px -20px color-mix(in srgb, var(--color-neutral-800) 35%, transparent);
   }
 
   .button-solid {
     @apply inline-flex items-center gap-3 rounded-full border border-primary-700 bg-primary-700 px-6 py-3 text-sm font-medium text-neutral-50 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-600 active:scale-95 dark:border-primary-400 dark:bg-primary-400 dark:text-neutral-950 dark:hover:bg-primary-300;
-    box-shadow: 0 16px 38px -24px theme('colors.primary.700 / 55%');
+    box-shadow: 0 16px 38px -24px color-mix(in srgb, var(--color-primary-700) 55%, transparent);
   }
 
   .button-ghost {
@@ -318,10 +397,6 @@
   .tag-chip {
     @apply inline-flex items-center gap-1.5 rounded-full border border-primary-200 bg-primary-50/70 px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.15em] text-primary-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary-400 hover:bg-primary-100/80 dark:border-primary-800 dark:bg-primary-950/45 dark:text-primary-200 dark:hover:border-primary-600 dark:hover:bg-primary-900/50 sm:gap-2 sm:px-3.5 sm:text-[0.74rem];
     min-height: 36px;
-  }
-
-  .note-panel {
-    @apply paper-panel p-6;
   }
 
   .note-panel-title {
@@ -374,10 +449,6 @@
   .portrait-frame img {
     @apply aspect-[4/5] w-full rounded-[1.4rem] object-cover;
   }
-
-  .post-nav-card {
-    @apply paper-panel block p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg active:scale-[0.98] sm:p-6;
-  }
 }
 
 @layer utilities {
@@ -402,4 +473,121 @@
   .delay-300 { animation-delay: 0.3s; }
   .delay-400 { animation-delay: 0.4s; }
   .delay-500 { animation-delay: 0.5s; }
+}
+
+.prose {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.9;
+  max-width: none;
+}
+
+.prose p {
+  margin-top: 1.15em;
+  margin-bottom: 1.15em;
+}
+
+.prose h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.85rem, 6vw, 4.75rem);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 550;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+}
+
+.prose h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2.4em;
+  margin-bottom: 0.5em;
+}
+
+.prose h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.prose code::before,
+.prose code::after {
+  content: "";
+}
+
+.prose pre {
+  font-family: var(--font-mono);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.prose blockquote {
+  border-left-width: 1px;
+  padding-left: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--color-neutral-600);
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose blockquote p:first-of-type::before {
+  content: none;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary-300);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--color-primary-600);
+}
+
+.prose hr {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.prose ul {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose ol {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }

@@ -3,6 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "description": "flpvvvv's personal blog - data scientist exploring statistics and machine learning",
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -10,16 +13,28 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/tailwind": "^6.0.2",
-    "astro": "^5.4.0",
+    "@astrojs/markdown-remark": "^7.3.4",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.2",
     "rehype-mathjax": "^7.1.0",
     "remark-math": "^6.0.0",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16",
-    "@types/node": "^22.13.5",
-    "typescript": "^5.7.3"
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "picomatch@<2.3.2": "2.3.2",
+      "@xmldom/xmldom@<0.9.12": "0.9.12",
+      "zod@<4.6.6": "4.6.6",
+      "source-map-js@<1.2.2": "1.2.2",
+      "postcss-selector-parser@<7.1.6": "7.1.6",
+      "katex@<0.18.2": "0.18.2",
+      "esbuild@<0.28.1": "0.28.1"
+    }
   }
 }

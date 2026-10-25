@@ -53,11 +53,12 @@ draft: false     # Exclude from build if true
 - MathJax SVG font cache uses `'local'` mode (each SVG self-contained); `'global'` breaks under Astro's slot-based rendering
 - Shiki for syntax highlighting
 
-**tailwind.config.mjs**
-- Editorial palette with verdigris primary, terracotta accent, and warm paper neutrals
-- Typography plugin for prose styling
-- Custom font system: `Fraunces`, `Source Serif 4`, `IBM Plex Sans`, `IBM Plex Mono`
-- Dark mode via class strategy
+**src/styles/global.css** (Tailwind CSS 4, CSS-first config)
+- `@theme` tokens define the editorial palette: verdigris primary, terracotta accent, warm paper neutrals
+- `@plugin "@tailwindcss/typography"` plus `.prose` overrides for prose styling
+- Custom font system via `--font-display` (`Fraunces`), `--font-serif` (`Source Serif 4`), `--font-sans` (`IBM Plex Sans`), `--font-mono` (`IBM Plex Mono`)
+- Dark mode via `.dark` class using `@custom-variant`
+- Tailwind is wired through `@tailwindcss/vite` in `astro.config.mjs`
 
 ### Styling
 - Theme feel: editorial scientific journal, not a generic tech blog

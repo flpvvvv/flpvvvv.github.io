@@ -46,7 +46,7 @@ const { tag, posts } = Astro.props;
     <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
       <div>
         {posts.map((post) => (
-          <a href={`/posts/${post.slug}/`} class="archive-row">
+          <a href={`/posts/${post.id}/`} class="archive-row">
             <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date, 'short')}</time>
             <div>
               <h2 class="archive-title">{post.data.title}</h2>

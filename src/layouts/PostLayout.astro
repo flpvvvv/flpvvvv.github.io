@@ -75,7 +75,7 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
 
         <nav class="mt-18 grid gap-4 border-t border-neutral-200/90 pt-8 dark:border-neutral-800/90 md:grid-cols-2">
           {prevPost ? (
-            <a href={`/posts/${prevPost.slug}/`} class="post-nav-card">
+            <a href={`/posts/${prevPost.id}/`} class="post-nav-card">
               <span class="note-panel-title">Previous</span>
               <span class="mt-4 block font-display text-[1.2rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100 sm:text-[1.35rem]">
                 {prevPost.data.title}
@@ -86,7 +86,7 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
           )}
 
           {nextPost ? (
-            <a href={`/posts/${nextPost.slug}/`} class="post-nav-card text-left md:text-right">
+            <a href={`/posts/${nextPost.id}/`} class="post-nav-card text-left md:text-right">
               <span class="note-panel-title">Next</span>
               <span class="mt-4 block font-display text-[1.2rem] leading-tight tracking-[-0.03em] text-neutral-900 dark:text-neutral-100 sm:text-[1.35rem]">
                 {nextPost.data.title}
@@ -144,7 +144,7 @@ const tocItems = headings.filter((heading) => heading.depth === 2 || heading.dep
 
       <div
         id="mobile-toc-backdrop"
-        class="fixed inset-0 z-30 hidden bg-black/40 backdrop-blur-sm"
+        class="fixed inset-0 z-30 hidden bg-black/40 backdrop-blur-xs"
         aria-hidden="true"
       ></div>
 

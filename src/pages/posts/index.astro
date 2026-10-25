@@ -44,7 +44,7 @@ const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
 
             <div>
               {postsByYear[year].map((post) => (
-                <a href={`/posts/${post.slug}/`} class="archive-row">
+                <a href={`/posts/${post.id}/`} class="archive-row">
                   <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date, 'short')}</time>
                   <div>
                     <h3 class="archive-title">{post.data.title}</h3>

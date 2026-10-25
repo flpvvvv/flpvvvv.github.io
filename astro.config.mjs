@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
+import { unified } from '@astrojs/markdown-remark';
 import remarkMath from 'remark-math';
 import rehypeMathjax from 'rehype-mathjax/svg';
 
@@ -8,20 +9,25 @@ import rehypeMathjax from 'rehype-mathjax/svg';
 export default defineConfig({
   site: 'https://flpvvvv.com',
   trailingSlash: 'always',
+  compressHTML: true,
   integrations: [
-    tailwind(),
     sitemap(),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   markdown: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [[rehypeMathjax, {
-      tex: {
-        tags: 'none',
-      },
-      svg: {
-        fontCache: 'local',
-      },
-    }]],
+    processor: unified({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [[rehypeMathjax, {
+        tex: {
+          tags: 'none',
+        },
+        svg: {
+          fontCache: 'local',
+        },
+      }]],
+    }),
     shikiConfig: {
       theme: 'github-dark',
       wrap: true,

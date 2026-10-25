@@ -1,5 +1,5 @@
 ---
-import { getCollection, type InferEntrySchema } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
@@ -14,20 +14,20 @@ export async function getStaticPaths() {
     const nextPost = index < sortedPosts.length - 1 ? sortedPosts[index + 1] : undefined;
 
     return {
-      params: { slug: post.slug },
+      params: { slug: post.id },
       props: { post, prevPost, nextPost },
     };
   });
 }
 
 interface Props {
-  post: InferEntrySchema<'posts'> & { slug: string; body: string };
-  prevPost?: InferEntrySchema<'posts'> & { slug: string };
-  nextPost?: InferEntrySchema<'posts'> & { slug: string };
+  post: CollectionEntry<'posts'>;
+  prevPost?: CollectionEntry<'posts'>;
+  nextPost?: CollectionEntry<'posts'>;
 }
 
 const { post, prevPost, nextPost } = Astro.props;
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 ---
 
 <PostLayout post={post} prevPost={prevPost} nextPost={nextPost} headings={headings}>
