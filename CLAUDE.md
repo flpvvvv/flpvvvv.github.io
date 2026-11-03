@@ -83,3 +83,5 @@ draft: false     # Exclude from build if true
 ### Dependency Updates
 - Dependabot alerts and security updates are enabled on the repository
 - `.github/dependabot.yml` runs npm (pnpm lockfile) version updates weekly on Sunday at 02:00 UTC
+- `packageManager` in `package.json` pins the pnpm version, and both workflows derive their pnpm version from it. Keep it on pnpm 10: pnpm 11+ ignores `pnpm.overrides` in `package.json` (it reads overrides from `pnpm-workspace.yaml` instead), and Dependabot regenerates `pnpm-lock.yaml` without the `overrides:` block, which breaks `--frozen-lockfile` installs and silently drops the security pins. Migrate the overrides to `pnpm-workspace.yaml` before bumping to pnpm 11+.
+- `.github/workflows/ci.yml` runs `pnpm install --frozen-lockfile` and a build on pull requests.
