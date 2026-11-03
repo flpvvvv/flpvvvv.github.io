@@ -1,5 +1,7 @@
 # flpvvvv.github.io
 
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=dependabot&logoColor=white)](https://github.com/flpvvvv/flpvvvv.github.io/blob/main/.github/dependabot.yml)
+
 Editorial math-first bio site and research notebook for flpvvvv, a data scientist writing about statistics, inference, machine learning, and the craft of understanding data.
 
 Built with [Astro](https://astro.build) and deployed on [GitHub Pages](https://pages.github.com/).
