@@ -16,11 +16,11 @@
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.5",
     "@astrojs/sitemap": "^3.7.4",
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.4.4",
+    "@tailwindcss/vite": "^4.3.4",
+    "astro": "^7.4.5",
     "rehype-mathjax": "^7.1.0",
     "remark-math": "^6.0.0",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.20",
